@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Scroll bar customization */
+:root {
+    --primary: rgb(0, 0, 0);
+    --secondary: rgb(60, 60, 60);
+  }
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--secondary) var(--primary);
+  }
+
+/*.oswald-<uniquifier> {*/
+/*             font-family: "Oswald", sans-serif;*/
+/*             font-optical-sizing: auto;*/
+/*             font-weight: <weight>;*/
+/*             font-style: normal;*/
+/*         }*/
