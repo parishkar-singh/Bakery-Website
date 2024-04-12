@@ -1,9 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {motion} from "framer-motion";
-
-import {BsGithub, BsInstagram, BsLinkedin} from "react-icons/bs";
-import {BiCollapseAlt, BiCookie} from "react-icons/bi";
-import {IoShareSocialSharp} from "react-icons/io5";
 import Bounce from "@/Motion/Bounce.tsx";
 
 interface NavbarProps {
@@ -17,7 +13,7 @@ interface navMotionProps {
 const Navbar: React.FC<NavbarProps> = ({navItems}) => {
     const spanClassName = 'w-14 h-14  text-xl rounded-full inline-flex  items-center justify-center transition duration-250 ease-in'
     const [isExpanded, setIsExpanded] = useState(false);
-
+    const buttonClass=" text-white font-sonsie text-xs md:text-xl font-black "
     const handleThemeSwitch = (e: any) => {
         e.stopPropagation();
         e.preventDefault();
@@ -69,26 +65,24 @@ const Navbar: React.FC<NavbarProps> = ({navItems}) => {
                     dragConstraints={{top: 0, right: 0, bottom: 0, left: 0}}
                     dragTransition={{bounceStiffness: 600, bounceDamping: 20}}
                     dragElastic={0.7}>
-            <motion.div className={`flex justify-center items-center`}>
+            <motion.div className={`flex  justify-center items-center`}>
                 <motion.nav
+                    onClick={(e) => {setIsExpanded(!isExpanded)}}
                     variants={containerVariants}
                     animate={isExpanded ? 'expanded' : 'collapsed'}
                     whileHover={
                         isExpanded ? {width: '70%',} : {width: '50%'}}
-                    className={`select-none z-99999999 flex items-center  text-white  backdrop-blur bg-white/10 dark:bg-neutral-950/10 h-[60px] mt-4 rounded-full border-none transition duration-200 ease-in justify-between`}>
+                    className={`select-none  px-1 md:px-10 z-99999999  flex items-center  text-white  backdrop-blur bg-pink-600/50 h-[60px] mt-4 rounded-full border-none transition duration-200 ease-in justify-between`}>
+
                     <Bounce>
-                        <h1 className={`text-black font-sonsie text-xl font-black`}>Order</h1>
+                        <h1  className={buttonClass}>Builder</h1>
                     </Bounce>
                     <Bounce>
-                        <h1 className={`text-black font-sonsie text-xl font-black`}>Builder</h1>
+                        <h1  className={buttonClass}>Coffee</h1>
                     </Bounce>
                     <Bounce>
-                        <h1 className={`text-black font-sonsie text-xl font-black`}>Coffee</h1>
+                        <h1 className={buttonClass}>Order</h1>
                     </Bounce>
-                    <Bounce>
-                        <h1 className={`text-black font-sonsie text-xl font-black`}>Seasonal</h1>
-                    </Bounce>
-                    
                 </motion.nav>
             </motion.div>
         </motion.div>
