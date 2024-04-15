@@ -72,16 +72,22 @@ const Navbar: React.FC<NavbarProps> = ({navItems}) => {
                     animate={isExpanded ? 'expanded' : 'collapsed'}
                     whileHover={
                         isExpanded ? {width: '70%',} : {width: '50%'}}
-                    className={`select-none  px-1 md:px-10 z-99999999  flex items-center  text-white  backdrop-blur bg-pink-600/50 h-[60px] mt-4 rounded-full border-none transition duration-200 ease-in justify-between`}>
+                    className={` select-none  px-1 md:px-10 z-99999999  flex items-center  text-white  backdrop-blur bg-pink-600/50 h-[60px] mt-4 rounded-full border-none transition duration-200 ease-in justify-between`}>
 
                     <Bounce>
-                        <h1  className={buttonClass}>Builder</h1>
+                        <a href="/builder">
+                            <h1 className={buttonClass}>Builder</h1>
+                        </a>
+                    </Bounce>
+                    <Bounce  whileTapCustom={0.7}>
+                        <a href="/">
+                        <h1  className={`p-4 bg-gradient-to-r from-violet-950 via-purple-800 to-violet-950 bg-clip-text text-transparent font-sonsie text-5xl`}>Tasty</h1>
+                        </a>
                     </Bounce>
                     <Bounce>
-                        <h1  className={buttonClass}>Cafe</h1>
-                    </Bounce>
-                    <Bounce>
+                        <a href="/account">
                         <h1 className={buttonClass}>Account</h1>
+                        </a>
                     </Bounce>
                 </motion.nav>
             </motion.div>

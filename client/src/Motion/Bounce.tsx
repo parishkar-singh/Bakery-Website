@@ -16,7 +16,7 @@ interface BounceProps {
 
 const Bounce: React.FC<BounceProps> = ({size, motionClassName, whileTapCustom,whileHoverCustom,text, textSize, children, width, className, height}) => {
     return (
-        <div>
+        <>
             <motion.div
                 className={className}
     // whileInView={{x: [-100, 0], opacity: [0, 1]}}
@@ -36,7 +36,7 @@ const Bounce: React.FC<BounceProps> = ({size, motionClassName, whileTapCustom,wh
         <span>{text}</span>
     )}
     </motion.div>
-    </div>
+    </>
 );
 }
 export default Bounce;

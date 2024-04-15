@@ -1,8 +1,8 @@
 import {Request, Response} from "express";
-import logger from "../Utils/Logger";
-import {CreateUserInput, VerifyUserInput} from "../Schema/user.schema";
-import {createUser, deleteAllUsers, findUser} from "../Services/user.service";
-import sendMail from "../Utils/Mailer";
+import logger from "@/Utils/Logger";
+import {CreateUserInput, VerifyUserInput} from "@/Schema/user.schema";
+import {createUser, deleteAllUsers, findUser} from "@/Services/user.service";
+import sendMail from "@/Utils/Mailer";
 
 export async function createUserHandler(req: Request<{}, {}, CreateUserInput["body"]>, res: Response) {
     try {

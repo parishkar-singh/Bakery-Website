@@ -1,11 +1,10 @@
-
 /*
 
 This file is the ❤ of the server 0_0
 
 Endpoints--> localhost:8080
 
-TechStack ->>  NodeJS, Express, Typescript, Mongoose, Prisma, Stripe
+TechStack ->>  Node.js, Express, Typescript, Mongoose
 HTTP Client --> Axios
 Deployment --> Docker, Docker-compose, EC2, Nginx, PM2
 

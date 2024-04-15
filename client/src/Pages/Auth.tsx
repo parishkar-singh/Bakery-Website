@@ -3,10 +3,8 @@ import AuthButton from "../Components/Buttons/AuthButton";
 import Input from "../Components/Inputs/Input";
 import DarkModeButton from "@/Components/Buttons/DarkModeButton.tsx";
 
-// Sign In component
 const SignIn: React.FC<{ handleSwitch: () => void }> = ({ handleSwitch }) => {
     function handleSignIn(): void {
-    // Api will be added later after the NodeTS works
   }
 
   return (
@@ -25,7 +23,6 @@ const SignIn: React.FC<{ handleSwitch: () => void }> = ({ handleSwitch }) => {
 // Sign Up component
 const SignUp: React.FC<{ handleSwitch: () => void }> = ({ handleSwitch }) => {
   function handleSignUp() {
-    // Api will be added later after the spring boot part
   }
 
   return (
