@@ -6,11 +6,11 @@ const Home: React.FC = React.memo(() => {
     return (
         <>
             <Banner/>
-            <Banner/>
-            <Banner/>
-            <Banner/>
-            <Banner/>
-            <Banner/>
+            {/*<Banner/>*/}
+            {/*<Banner/>*/}
+            {/*<Banner/>*/}
+            {/*<Banner/>*/}
+            {/*<Banner/>*/}
             {/*<Banner/>*/}
             {/*<Banner/>*/}
         </>
