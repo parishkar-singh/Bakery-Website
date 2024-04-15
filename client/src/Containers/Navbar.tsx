@@ -78,10 +78,10 @@ const Navbar: React.FC<NavbarProps> = ({navItems}) => {
                         <h1  className={buttonClass}>Builder</h1>
                     </Bounce>
                     <Bounce>
-                        <h1  className={buttonClass}>Coffee</h1>
+                        <h1  className={buttonClass}>Cafe</h1>
                     </Bounce>
                     <Bounce>
-                        <h1 className={buttonClass}>Order</h1>
+                        <h1 className={buttonClass}>Account</h1>
                     </Bounce>
                 </motion.nav>
             </motion.div>

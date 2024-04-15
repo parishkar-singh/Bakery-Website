@@ -1,7 +1,6 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useEffect, useRef } from 'react';
-import {BackgroundGradientAnimationDemo} from "@/Pages/GradientPage.tsx";
 import EmployeesTab from "@/Tabs/EmployeesTab.tsx";
 
 gsap.registerPlugin(ScrollTrigger);
