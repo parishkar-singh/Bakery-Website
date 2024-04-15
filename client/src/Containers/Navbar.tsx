@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {motion} from "framer-motion";
 import Bounce from "@/Motion/Bounce.tsx";
+import {shallowEqual, useSelector} from "react-redux";
+import {RootState} from "@/Redux/Store.ts";
 
 interface NavbarProps {
     navItems?: string[]
@@ -10,46 +12,26 @@ interface navMotionProps {
     children: React.ReactNode
 }
 
-const Navbar: React.FC<NavbarProps> = ({navItems}) => {
-    const spanClassName = 'w-14 h-14  text-xl rounded-full inline-flex  items-center justify-center transition duration-250 ease-in'
+
+const Navbar: React.FC<NavbarProps> = React.memo(() => {
+    const theme = useSelector((state: RootState) => shallowEqual);
     const [isExpanded, setIsExpanded] = useState(false);
-    const buttonClass=" text-white font-sonsie text-xs md:text-xl font-black "
-    const handleThemeSwitch = (e: any) => {
-        e.stopPropagation();
-        e.preventDefault();
-        // setTheme(theme === 'dark' ? 'light' : 'dark')
-    }
+    const buttonClass = `font-sonsie text-xs md:text-xl font-black`
+
     const handleImageHover = (e: any) => {
         e.stopPropagation();
         e.preventDefault();
     }
 
-    const containerVariants = {
-        expanded: {
-            width: '75%',
-            transition: {
-                type: 'spring',
-                stiffness: 500,
-                damping: 15,
-            },
-        },
-        collapsed: {
-            width: '45%',
-            transition: {
-                type: 'spring',
-                stiffness: 500,
-                damping: 15,
-            },
-        },
-    };
+
     return (
-        <motion.div className={'overflow-visible select-none  sticky top-0 z-50 transition-100 ease-in'}
+        <motion.div className={'overflow-visible  fixed top-0 left-0 w-screen select-none  transition-100 ease-in'}
                     initial={{scale: 0}}
-                    animate={{scale: .9}}
+                    animate={{scale: 1}}
                     transition={{
                         type: "spring",
-                        stiffness: 260,
-                        damping: 20
+                        stiffness: 300,
+                        damping: 10
                     }}
                     whileHover={{scale: 1}}
                     style={{
@@ -57,7 +39,7 @@ const Navbar: React.FC<NavbarProps> = ({navItems}) => {
                         cursor: "grab",
                     }}
                     whileTap={{
-                        scale: 1.2,
+                        scale: 1.1,
                         borderRadius: "100%",
                         cursor: "grabbing"
                     }}
@@ -67,32 +49,38 @@ const Navbar: React.FC<NavbarProps> = ({navItems}) => {
                     dragElastic={0.7}>
             <motion.div className={`flex  justify-center items-center`}>
                 <motion.nav
-                    onClick={(e) => {setIsExpanded(!isExpanded)}}
-                    variants={containerVariants}
-                    animate={isExpanded ? 'expanded' : 'collapsed'}
-                    whileHover={
-                        isExpanded ? {width: '70%',} : {width: '50%'}}
-                    className={` select-none  px-1 md:px-10 z-99999999  flex items-center  text-white  backdrop-blur bg-pink-600/50 h-[60px] mt-4 rounded-full border-none transition duration-200 ease-in justify-between`}>
+                    animate={{
+                        width: '45%',
+                        transition: {
+                            type: 'spring',
+                            stiffness: 500,
+                            damping: 15,
+                        },
+                    }}
+                    whileTap={{width:'60%'}}
+                    whileHover={{width: '50%'}}
+                    className={` select-none  px-1 md:px-10   flex items-center  text-white  backdrop-blur bg-white/25 h-[70px] mt-4 rounded-full border-none transition duration-200 ease-in justify-between`}>
 
                     <Bounce>
-                        <a href="/builder">
+                        <a draggable={false} className=" text-red-600" href="/builder">
                             <h1 className={buttonClass}>Builder</h1>
                         </a>
                     </Bounce>
-                    <Bounce  whileTapCustom={0.7}>
-                        <a href="/">
-                        <h1  className={`p-4 bg-gradient-to-r from-violet-950 via-purple-800 to-violet-950 bg-clip-text text-transparent font-sonsie text-5xl`}>Tasty</h1>
+                    <Bounce whileTapCustom={0.7}>
+                        <a draggable={false} href="/">
+                            <h1 className={`p-4 bg-gradient-to-r from-violet-950 via-purple-800 to-violet-950 bg-clip-text text-transparent font-sonsie text-5xl select-none`}>Tasty</h1>
                         </a>
                     </Bounce>
                     <Bounce>
-                        <a href="/account">
-                        <h1 className={buttonClass}>Account</h1>
+                        <a draggable={false} className={'text-blue-600'} href="/account">
+                            <h1 className={buttonClass}>Account</h1>
                         </a>
                     </Bounce>
                 </motion.nav>
             </motion.div>
         </motion.div>
     );
-};
+
+});
 
 export default Navbar;

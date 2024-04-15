@@ -33,10 +33,6 @@ const Builder: React.FunctionComponent = () => {
             <h2 className={`text-9xl text-center select-none font-black text-black`}>Recipe Builder</h2>
 
             <form onSubmit={handleSubmit}>
-                <FormInput  name={""} label={""}/>
-                <FormInput  name={""} label={""}/>
-                <FormInput  name={""} label={""}/>
-                <FormInput  name={""} label={""}/>
                 <button type="submit">Submit</button>
             </form>
         </>

@@ -9,17 +9,13 @@ import {SidebarProvider} from "./Context/TabContext";
 import store, {RootState} from "@/Redux/Store.ts";
 import Lenis from '@studio-freight/lenis'
 import gsap from 'gsap'
-import DarkModeButton from "@/Components/Buttons/DarkModeButton.tsx";
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
 import Navbar from "@/Containers/Navbar.tsx";
 import Builder from "@/Pages/Builder.tsx";
 
-const App = () => {
-    const theme = useSelector((state: RootState) => state.theme);
-
-
+const App: React.FunctionComponent = (): React.ReactNode => {
     useEffect(() => {
-        const lenis = new Lenis()
+        const lenis:Lenis = new Lenis()
 
         lenis.on('scroll', ScrollTrigger.update)
 
@@ -32,26 +28,26 @@ const App = () => {
         };
     }, []);
     return (
-        <div className=" bg-secondary flex overflow-clip text-white flex-col min-h-screen max-w-screen ">
-            <Navbar/>
-            <SidebarProvider >
-                <Router >
+        <div className="relative bg-secondary flex overflow-clip text-white flex-col min-h-screen max-w-screen ">
+            <Router>
+                <SidebarProvider>
                     <Routes>
                         <Route path="/" element={<Home/>}/>
                         <Route path="/auth" element={<Auth/>}/>
                         <Route path="/builder" element={<Builder/>}/>
-                        {/*<Route path="/dashboard" element={<Home />} />*/}
                     </Routes>
-                </Router>
-            </SidebarProvider>
+                </SidebarProvider>
+            </Router>
+            <Navbar/>
         </div>
     );
+
 };
 
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
-                <App/>
+            <App/>
         </Provider>
     </React.StrictMode>,
     document.getElementById("root")

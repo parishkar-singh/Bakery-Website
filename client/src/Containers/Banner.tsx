@@ -1,12 +1,11 @@
 import React from "react";
 import BannerCard from "@/Components/Cards/BannerCard.tsx";
 
-const Banner: React.FunctionComponent = () => {
-
+const Banner: React.FunctionComponent = React.memo(() => {
     return (
-        <div className="flex justify-center bg-secondary h-[600px] w-full">
+        <div className="flex justify-center bg-secondary h-screen w-full">
             {/* Left side */}
-            <div className=" flex flex-col h-full w-full  ">
+            <div className=" flex flex-col  h-full w-full  ">
                 <BannerCard Image="/biskit.png" Heading="Crispes" Background={"yellow"} />
                 <div className={`flex h-full`}>
                 <BannerCard Image="/jelly.png" Heading="Jelly's" Background={"green"} />
@@ -21,6 +20,6 @@ const Banner: React.FunctionComponent = () => {
             </div>
         </div>
     );
-};
+});
 
 export default Banner;

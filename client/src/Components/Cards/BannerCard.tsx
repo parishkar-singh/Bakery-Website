@@ -10,7 +10,7 @@ interface BannerCardProps {
 
 const BannerCard: React.FunctionComponent<BannerCardProps> = React.memo(({ Background, Image, Heading }) => {
     const colorClassMap: { [key: string]: string } = {
-        red: 'bg-red-500',
+        red: 'bg-red-600',
         blue: 'bg-blue-500',
         green: 'bg-green-500',
         purple: 'bg-purple-500',
@@ -23,8 +23,9 @@ const BannerCard: React.FunctionComponent<BannerCardProps> = React.memo(({ Backg
     return (
         <motion.div
             whileTap={{ scale: 2, borderRadius: "100%" }}
-            initial={{ scale: 0 ,x:3100}}
-            animate={{ rotate: 0, scale: 1 ,x:0}}
+            initial={{scale: 0 ,y:3840}}
+            animate={{scale: 1 ,y:0}}
+
             transition={{
                 type: "spring",
                 stiffness: 50,
@@ -35,7 +36,7 @@ const BannerCard: React.FunctionComponent<BannerCardProps> = React.memo(({ Backg
         >
             <img draggable="false" className="absolute  group-hover:scale-125 w-full h-full object-contain filter group-hover:blur-lg transition duration-500 ease-in-out" src={Image} alt="" />
             <Bounce whileTapCustom={0.5}>
-                <h1 className="relative font-sonsie group-hover:scale-125 transition duration-200 text-5xl z-10">{Heading}</h1>
+                <h1 className="relative font-sonsie group-hover:scale-125 transition duration-200 text-5xl ">{Heading}</h1>
             </Bounce>
         </motion.div>
     );
