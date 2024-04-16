@@ -1,5 +1,6 @@
 import toast from 'react-hot-toast';
 import { Toaster } from 'react-hot-toast';
+import React from "react";
 
 export const notifyUser = (message: string, isSuccess: boolean): void => {
     const toastOptions = {

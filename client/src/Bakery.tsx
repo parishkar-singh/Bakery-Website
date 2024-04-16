@@ -1,11 +1,11 @@
 import React, {useEffect} from "react";
 import ReactDOM from "react-dom";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import {Provider, useSelector} from "react-redux";
+import {Provider} from "react-redux";
 import Home from "./Pages/Home";
 import Auth from "./Pages/Auth";
 import "./globals.css";
-import store, {RootState} from "@/Redux/Store.ts";
+import store from "@/Redux/Store.ts";
 import Lenis from '@studio-freight/lenis'
 import gsap from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
@@ -27,7 +27,7 @@ const App: React.FunctionComponent = (): React.ReactNode => {
         };
     }, []);
     return (
-        <div className="relative bg-violet-950 flex overflow-clip text-white flex-col min-h-screen max-w-screen ">
+        <main className="relative bg-violet-950 flex overflow-clip text-white flex-col min-h-screen max-w-screen ">
             <Router>
                     <Routes>
                         <Route path="/" element={<Home/>}/>
@@ -36,7 +36,7 @@ const App: React.FunctionComponent = (): React.ReactNode => {
                     </Routes>
             </Router>
             <Navbar/>
-        </div>
+        </main>
     );
 
 };

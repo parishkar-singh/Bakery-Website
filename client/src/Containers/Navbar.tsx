@@ -1,29 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {motion} from "framer-motion";
 import Bounce from "@/Motion/Bounce.tsx";
-import {shallowEqual, useSelector} from "react-redux";
-import {RootState} from "@/Redux/Store.ts";
 
-interface NavbarProps {
-    navItems?: string[]
-}
-
-interface navMotionProps {
-    children: React.ReactNode
-}
-
-
-const Navbar: React.FC<NavbarProps> = React.memo(() => {
-    useSelector((state: RootState) => shallowEqual);
-    const [isExpanded, setIsExpanded] = useState(false);
+const Navbar: React.FunctionComponent = React.memo(() => {
     const buttonClass = `font-sonsie text-xs md:text-2xl font-black`
-
-    const handleImageHover = (e: any) => {
-        e.stopPropagation();
-        e.preventDefault();
-    }
     return (
-        <motion.div className={'select-none overflow-visible fixed top-0 left-0 w-screen transition-100 ease-in'}
+        <motion.nav className={'select-none overflow-visible fixed top-0 left-0 w-screen transition-100 ease-in'}
                     initial={{scale: 0}}
                     animate={{scale: 1}}
                     whileTap={{
@@ -46,7 +28,7 @@ const Navbar: React.FC<NavbarProps> = React.memo(() => {
                     dragTransition={{bounceStiffness: 600, bounceDamping: 20}}
                     dragElastic={0.7}>
             <motion.div className={`flex  justify-center items-center`}>
-                <motion.nav
+                <motion.div
                     animate={{
                         width: '45%',
                         transition: {
@@ -55,7 +37,7 @@ const Navbar: React.FC<NavbarProps> = React.memo(() => {
                             damping: 15,
                         },
                     }}
-                    whileTap={{width:'60%'}}
+                    whileTap={{width: '60%'}}
                     whileHover={{width: '50%'}}
                     className={` select-none  px-1 md:px-10   flex items-center  text-white  backdrop-blur bg-white/25 h-[70px] mt-4 rounded-full border-none transition duration-200 ease-in justify-between`}>
 
@@ -74,9 +56,9 @@ const Navbar: React.FC<NavbarProps> = React.memo(() => {
                             <h1 className={buttonClass}>Account</h1>
                         </a>
                     </Bounce>
-                </motion.nav>
+                </motion.div>
             </motion.div>
-        </motion.div>
+        </motion.nav>
     );
 
 });
