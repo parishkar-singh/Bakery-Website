@@ -3,13 +3,10 @@ import winston from 'winston';
 const prettyPrintFormat = winston.format.printf(({ level, message, timestamp }) => {
     const timestampWidth =22;
     const levelWidth = 22;
-
     const formattedTimestamp = timestamp.padEnd(timestampWidth, ' ');
     const formattedLevel = `[${level}]`.padEnd(levelWidth, ' ');
     return `${formattedTimestamp}${formattedLevel}${message}`;
 });
-
-// Custom Logger class
 class CustomLogger {
     private logger: winston.Logger;
 
@@ -59,58 +56,56 @@ class CustomLogger {
     }
 
     // Custom log methods
-    mailer(message: string) {
+    mailer(message: string):winston.Logger {
         return this.logger.log('Mailer', message);
     }
-    http(message: string) {
+    http(message: string):winston.Logger {
         return this.logger.log('HTTP', message);
     }
-    https(message: string) {
+    https(message: string):winston.Logger {
         return this.logger.log('HTTPS', message);
     }
-    express(message: string) {
+    express(message: string):winston.Logger {
         return this.logger.log('Express', message);
     }
-    database(message: string) {
+    database(message: string):winston.Logger {
         return this.logger.log('Database', message);
     }
 
-    success(message: string) {
+    success(message: string):winston.Logger {
         return this.logger.log('Success', message);
     }
 
-    transaction(message: string) {
+    transaction(message: string):winston.Logger {
         return this.logger.log('transaction', message);
     }
 
     // Default log methods
-    error(message: string) {
+    error(message: string):winston.Logger {
         return this.logger.log('error', message);
     }
 
-    warn(message: string) {
+    warn(message: string):winston.Logger {
         return this.logger.log('warn', message);
     }
 
-    info(message: string) {
+    info(message: string):winston.Logger {
         return this.logger.log('info', message);
     }
 
-    verbose(message: string) {
+    verbose(message: string):winston.Logger {
         return this.logger.log('verbose', message);
     }
 
-    debug(message: string) {
+    debug(message: string):winston.Logger {
         return this.logger.log('debug', message);
     }
 
-    silly(message: string) {
+    silly(message: string):winston.Logger {
         return this.logger.log('silly', message);
     }
 
-    // Additional methods as required
 }
 
-// Create and export the logger instance
 const logger = new CustomLogger();
 export default logger;

@@ -8,7 +8,7 @@ export default {
     accessTokenTtl: '15m',
     refreshTokenTtl: '1y',
     googleAuthRedirect: 'https://server.domain.com/api/sessions/oauth/google',
-    dbURI: process.env.DBURI+"/release",
+    dbURI: process.env.DBURI+"/BakeryRelease",
     privateKey: process.env.privatekey,
     publicKey: process.env.publickey,
     googleClientId: process.env.GOOGLE_CLIENT_ID,
