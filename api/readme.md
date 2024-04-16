@@ -1,7 +1,6 @@
 
-# NODEJS + EXPRESS BACKEND 2023
+# Bakery Website NODEJS + EXPRESS BACKEND 
 
-This is the NodeJS starter pack, Node + Express server written in typescript.
 This is production ready code with all the security features implemented.
 
 
@@ -63,6 +62,4 @@ To run this project, you will need to add the following environment variables to
 `GOOGLE_CLIENT_ID`
 `GOOGLE_CLIENT_SECRET`
 `GOOGLE_REDIRECT_URL`
-`SMTP_USER`
-`SMTP_PASS`
 
