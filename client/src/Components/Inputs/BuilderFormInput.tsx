@@ -19,12 +19,11 @@ const BuilderFormInput: React.FC<InputProps> = React.memo((props) => {
 
     return (
         <motion.div
-
             className={`select-none  relative w-full h-full flex  flex-col gap-2 justify-center items-center group  ${BuilderFormInputBackgroundClass}`}>
             <img draggable={false}
                  className={'absolute group-hover:scale-125 transition duration-500 group-hover:blur-lg object-contain h-full w-full '}
                  src={props.image} alt=""/>
-            <motion.div className={`p-2  flex flex-col rounded-3xl items-center justify-center `}>
+            <motion.div className={`p-2 flex flex-col rounded-3xl items-center justify-center `}>
                 <span
                     className={"font-sonsie text-white drop-shadow-4xl  rounded-3xl text-6xl  relative select-none  "}>{props.Label}</span>
                 <div>
