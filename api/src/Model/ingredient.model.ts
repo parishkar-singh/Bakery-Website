@@ -5,6 +5,8 @@ import 'dotenv/config'
 export interface IngredientsInput {
     name: string;       // Ingredient's name
     unit: 'gm' | 'ml';  // Ingredient's Unit (enum)
+    cost: number;
+    calories:number;
 }
 
 // Interface extending Mongoose Document, representing Ingredients document
@@ -17,9 +19,11 @@ export interface IngredientsDocument extends IngredientsInput, mongoose.Document
 const ingredientsSchema: mongoose.Schema = new mongoose.Schema({
     name: {type: String, required: true},            // Ingredient's name (required)
     unit: {type: String, required: true, enum: ['gm', 'ml']}, // Ingredients unit is enum
+    calories:{type:Number,required:true},
+    cost:{type:Number,required:true}
 }, {timestamps: true});                      // Auto-generate timestamps for createdAt and updatedAt
 
 // Define Mongoose model for Ingredients using IngredientsDocument interface and IngredientsSchema
-const IngredientsModel = mongoose.model<IngredientsDocument>('Ingredient', ingredientsSchema);
+const IngredientModel = mongoose.model<IngredientsDocument>('Ingredient', ingredientsSchema);
 
-export default IngredientsModel;
+export default IngredientModel;

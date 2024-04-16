@@ -1,7 +1,7 @@
-import Express from "express";
+import {Router} from "express";
 import {Request, Response} from "express";
 import path from "path";
-const router = Express.Router();
+const router:Router = Router();
 
 router.get('/', (req: Request, res: Response) => {
     // res.status(200).send('Express Server Online');

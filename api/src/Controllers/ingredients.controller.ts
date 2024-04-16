@@ -4,7 +4,7 @@ import {
     getAllIngredientsService,
     getIngredientByIdService, updateIngredientService
 } from "@/Services/ingredients.service";
-import {IngredientsDocument, IngredientsInput} from "@/Model/ingredients.model";
+import {IngredientsDocument, IngredientsInput} from "@/Model/ingredient.model";
 
 /**
  * Controller function to retrieve all ingredients.
@@ -28,7 +28,7 @@ export async function getAllIngredients(req: Request, res: Response): Promise<vo
 export async function createIngredient(req: Request, res: Response): Promise<void> {
     const ingredientInput: IngredientsInput = req.body;
     try {
-        const newIngredient = await createIngredientService(ingredientInput);
+        const newIngredient: IngredientsDocument = await createIngredientService(ingredientInput);
         res.status(201).json(newIngredient);
     } catch (error: any) {
         res.status(400).json({message: error.message});

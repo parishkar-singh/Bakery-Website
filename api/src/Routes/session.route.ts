@@ -1,4 +1,4 @@
-import Express from "express";
+import Express, {Router} from "express";
 import validateResource from "@/Middleware/validateResource";
 import {createSessionSchema} from "@/Schema/session.schema";
 import {
@@ -10,7 +10,7 @@ import {
 import requireUser from "@/Middleware/requireUser";
 
 // Routes
-const router = Express.Router();
+const router:Router = Router();
 // Creates Session
 router.post('/',validateResource(createSessionSchema),createUserSessionHandler);
 // Gets User

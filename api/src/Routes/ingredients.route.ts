@@ -1,4 +1,4 @@
-import express from "express";
+import express, {Router} from "express";
 import {
     createIngredient, deleteIngredient,
     getAllIngredients,
@@ -6,7 +6,7 @@ import {
     updateIngredient
 } from "@/Controllers/ingredients.controller";
 
-const router = express.Router();
+const router:Router = Router();
 
 // Routes
 router.get("/", getAllIngredients);

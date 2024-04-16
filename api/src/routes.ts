@@ -1,7 +1,8 @@
 import {Express, Request, Response, NextFunction, Router} from "express";
-import healthRoutes from "./Routes/health.route";
-import userRoutes from "./Routes/user.route";
-import sessionRoutes from "./Routes/session.route";
+import healthRoutes from "@/Routes/health.route";
+import userRoutes from "@/Routes/user.route";
+import sessionRoutes from "@/Routes/session.route";
+import ingredientsRoutes from "@/Routes/ingredients.route";
 import * as path from "path";
 
 function routes(app: Express): void {
@@ -9,6 +10,7 @@ function routes(app: Express): void {
 
     // Combine all the Routes
     apiRouter.use('/users', userRoutes);
+    apiRouter.use('/ingredients',ingredientsRoutes)
     apiRouter.use('/sessions', sessionRoutes);
 
     // Every route in apiRouter will be prefixed with /api

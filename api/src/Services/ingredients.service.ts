@@ -1,4 +1,4 @@
-import IngredientsModel, { IngredientsDocument, IngredientsInput } from "@/Model/ingredients.model";
+import IngredientModel, { IngredientsDocument, IngredientsInput } from "@/Model/ingredient.model";
 import { FilterQuery } from "mongoose";
 
 /**
@@ -7,7 +7,7 @@ import { FilterQuery } from "mongoose";
  * @returns A promise that resolves to an array of ingredients documents.
  */
 export async function getAllIngredientsService(query: FilterQuery<IngredientsDocument> = {}): Promise<IngredientsDocument[]> {
-    return IngredientsModel.find(query).exec();
+    return IngredientModel.find(query).exec();
 }
 
 /**
@@ -16,7 +16,7 @@ export async function getAllIngredientsService(query: FilterQuery<IngredientsDoc
  * @returns A promise that resolves to the created ingredient document.
  */
 export async function createIngredientService(ingredientInput: IngredientsInput): Promise<IngredientsDocument> {
-    return IngredientsModel.create(ingredientInput);
+    return IngredientModel.create(ingredientInput);
 }
 
 /**
@@ -25,7 +25,7 @@ export async function createIngredientService(ingredientInput: IngredientsInput)
  * @returns A promise that resolves to the found ingredient document, or null if not found.
  */
 export async function getIngredientByIdService(id: string): Promise<IngredientsDocument | null> {
-    return IngredientsModel.findById(id).exec();
+    return IngredientModel.findById(id).exec();
 }
 
 /**
@@ -35,7 +35,7 @@ export async function getIngredientByIdService(id: string): Promise<IngredientsD
  * @returns A promise that resolves to the updated ingredient document, or null if not found.
  */
 export async function updateIngredientService(id: string, ingredientInput: IngredientsInput): Promise<IngredientsDocument | null> {
-    return IngredientsModel.findByIdAndUpdate(id, ingredientInput, { new: true }).exec();
+    return IngredientModel.findByIdAndUpdate(id, ingredientInput, { new: true }).exec();
 }
 
 /**
@@ -44,5 +44,5 @@ export async function updateIngredientService(id: string, ingredientInput: Ingre
  * @returns A promise that resolves when the ingredient is successfully deleted.
  */
 export async function deleteIngredientService(id: string): Promise<void> {
-    await IngredientsModel.findByIdAndDelete(id).exec();
+    await IngredientModel.findByIdAndDelete(id).exec();
 }
