@@ -20,12 +20,12 @@ import Logger from "@/Utils/Logger";
 import ExpressServer from "@/Utils/Server";
 import {Express} from "express";
 
-const app:Express = ExpressServer()
-app?.listen(config.get<number>('port'), async () => {
-    const Domain = config.get<string>('domain');
+const app: Express = ExpressServer()
+app?.listen(config.get<number>('port'), async (): Promise<void> => {
+    const Domain: String = config.get<string>('domain');
     Logger.express(`Server Online`);
     await Mongo();
-    if (process.env.NODE_ENV === 'production') {
+    if (process.env.NODE_ENV as string === 'production') {
         Logger.https(`https://${Domain}`);
     } else {
         Logger.http(`http://${Domain}:8080`);
