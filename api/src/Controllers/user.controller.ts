@@ -1,8 +1,7 @@
-import { Request, Response } from "express";
+import {Request, Response} from "express";
 import logger from "@/Utils/Logger";
-import { CreateUserInput, VerifyUserInput } from "@/Schema/user.schema";
-import { createUser, deleteAllUsers, findUser } from "@/Services/user.service";
-import sendMail from "@/Utils/Mailer";
+import {CreateUserInput} from "@/Schema/user.schema";
+import {createUser, deleteAllUsers, findUser} from "@/Services/user.service";
 
 /**
  * Handler for creating a new user.
@@ -41,16 +40,8 @@ export async function deleteUserHandler(req: Request, res: Response) {
  * @param res The response object.
  * @returns The current user data.
  */
-export async function getCurrentUser(req: Request, res: Response) {
+export async function getCurrentUser(req: Request, res: Response): Promise<any> {
     return res.send(res.locals.user);
 }
 
-/**
- * Handler for getting the current user in the app.
- * @param req The request object.
- * @param res The response object.
- * @returns The current user data for the app.
- */
-export async function getCurrentUserApp(req: Request, res: Response) {
-    return res.send(res.locals.user);
-}
+
