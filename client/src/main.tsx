@@ -4,8 +4,7 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import {Provider, useSelector} from "react-redux";
 import Home from "./Pages/Home";
 import Auth from "./Pages/Auth";
-import "./styles.css";
-import {SidebarProvider} from "./Context/TabContext";
+import "./globals.css";
 import store, {RootState} from "@/Redux/Store.ts";
 import Lenis from '@studio-freight/lenis'
 import gsap from 'gsap'
@@ -24,19 +23,17 @@ const App: React.FunctionComponent = (): React.ReactNode => {
         })
         gsap.ticker.lagSmoothing(0)
 
-        return () => {
+        return ():void => {
         };
     }, []);
     return (
         <div className="relative bg-secondary flex overflow-clip text-white flex-col min-h-screen max-w-screen ">
             <Router>
-                <SidebarProvider>
                     <Routes>
                         <Route path="/" element={<Home/>}/>
                         <Route path="/auth" element={<Auth/>}/>
                         <Route path="/builder" element={<Builder/>}/>
                     </Routes>
-                </SidebarProvider>
             </Router>
             <Navbar/>
         </div>

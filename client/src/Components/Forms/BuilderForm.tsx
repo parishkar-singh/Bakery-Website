@@ -1,23 +1,27 @@
-import React, { useState } from "react";
-import { z } from "zod";
-import BuilderFormInput from "@/Components/Inputs/BuilderFormInput.tsx";
+import React, {useState} from "react";
+import {z} from "zod";
+import BuilderFormInput from "@/Components/Cards/BuilderFormInput.tsx";
 import BuilderLoader from "@/Components/ClipLoaders/BuilderLoader.tsx";
+import Bounce from "@/Motion/Bounce.tsx";
+import {motion} from "framer-motion";
+import BuilderFormButton from "@/Components/Cards/BuilderFormButton.tsx";
+import {Shapes, ThermometerSnowflake} from "lucide-react";
 
 const schema = z.object({
-    nutsQuantity: z.number().min(0),
-    sweetBakingSoda: z.number().min(0),
-    fiberQuantity: z.number().min(0),
-    sugarQuantity: z.number().min(0),
-    oilQuantity: z.number().min(0),
+    NutsQuantity: z.number().min(0),
+    SweetBakingSoda: z.number().min(0),
+    FiberQuantity: z.number().min(0),
+    SugarQuantity: z.number().min(0),
+    OilQuantity: z.number().min(0),
 });
 
 const BuilderForm: React.FunctionComponent = (): React.ReactNode => {
     const [formValues, setFormValues] = useState({
-        nutsQuantity: 0,
-        sweetBakingSoda: 0,
-        fiberQuantity: 0,
-        sugarQuantity: 0,
-        oilQuantity: 0,
+        NutsQuantity: 69,
+        SweetBakingSoda: 120,
+        FiberQuantity: 70,
+        SugarQuantity: 90,
+        OilQuantity: 50,
     });
     const [formErrors, setFormErrors] = useState<z.ZodIssue[] | null>(null);
 
@@ -41,50 +45,107 @@ const BuilderForm: React.FunctionComponent = (): React.ReactNode => {
     };
 
     return (
-        <div className=" mt-40 flex flex-col">
+        <>
+            <form
+                className="flex justify-center items-center w-full h-screen " onSubmit={handleSubmit}>
+                {/*Left ones*/}
+                <div className={`flex flex-col h-full w-full`}>
+                    <div className={`flex w-full h-full`}>
+                        <BuilderFormButton
+                            name="Shape"
+                            value={formValues.FiberQuantity}
+                            onChange={handleInputChange}
+                            Label={`Shape`}
+                            icon={Shapes}
+                            Background={'orange'} delay={.2}/>
+                        <BuilderFormButton
+                            name="TemparatureQuantity"
+                            value={formValues.OilQuantity}
+                            onChange={handleInputChange}
+                            Label={'Temperature'}
+                            Background={'teal'}
+                            icon={ThermometerSnowflake} delay={.3}/>
+                    </div>
+                    <div className={`flex w-full h-full`}>
+                        <BuilderFormInput
+                            name="FiberQuantity"
+                            value={formValues.FiberQuantity}
+                            onChange={handleInputChange}
+                            Label={`Fiber`}
+                            image={`/builder/fiber.png`}
+                            Background={'yellow'}
+                            delay={.05}
 
-            <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
-                <span>Nuts</span>
-                <BuilderFormInput
-                    name="nutsQuantity"
-                    value={formValues.nutsQuantity}
-                    onChange={handleInputChange}
-                />
-                <span>Sweet Baking Soda</span>
-                <BuilderFormInput
-                    name="sweetBakingSoda"
-                    value={formValues.sweetBakingSoda}
-                    onChange={handleInputChange}
-                />
-                <span>Fiber quantity</span>
-                <BuilderFormInput
-                    name="fiberQuantity"
-                    value={formValues.fiberQuantity}
-                    onChange={handleInputChange}
-                />
-                <span>Sugar Quantity</span>
-                <BuilderFormInput
-                    name="sugarQuantity"
-                    value={formValues.sugarQuantity}
-                    onChange={handleInputChange}
-                />
-                <span>Oil Quantity</span>
-                <BuilderFormInput
-                    name="oilQuantity"
-                    value={formValues.oilQuantity}
-                    onChange={handleInputChange}
-                />
-                <button type="submit">Submit</button>
+                        />
+
+                        <BuilderFormInput
+                            name="SugarQuantity"
+                            value={formValues.SugarQuantity}
+                            onChange={handleInputChange}
+                            Label={'Sugar'}
+                            Background={'green'}
+                            image={`/builder/sugar.png`}
+                            delay={.1}
+                        />
+                        <BuilderFormInput
+                            name="OilQuantity"
+                            value={formValues.OilQuantity}
+                            onChange={handleInputChange}
+                            Label={'Oil'}
+                            Background={'pink'}
+                            image={`/builder/oil.png`}
+                            delay={.2}
+                        />
+                    </div>
+                </div>
+                {/*Right ones */}
+                <div className={`flex flex-col w-full h-full`}>
+                    <BuilderFormInput
+                        name="NutsQuantity"
+                        value={formValues.NutsQuantity}
+                        onChange={handleInputChange}
+                        Label={'Nuts'}
+                        delay={.2}
+                        Background={'red'}
+                        image={`/builder/nuts.png`}
+
+                    />
+
+                    <BuilderFormInput
+                        name="SweetBakingSoda"
+                        value={formValues.SweetBakingSoda}
+                        onChange={handleInputChange}
+                        Label={'Soda'}
+                        delay={.2}
+                        image={`/builder/soda.png`}
+                        Background={'blue'}
+                    />
+                    <motion.button type="submit" whileTap={{scale: 2, borderRadius: "100%"}}
+                                   initial={{scale: 0, x: 2160}}
+                                   animate={{scale: 1, x: 0}}
+                                   transition={{
+                                       type: "spring",
+                                       stiffness: 50,
+                                       damping: 15,
+                                       duration: 0.5
+                                   }}
+                                   className={`w-full h-full bg-violet-700 flex font-sonsie text-6xl justify-center items-center`}>
+                        BakeUp
+                    </motion.button>
+                    <BuilderLoader/>
+                </div>
+
+                {/*<button className={`text-white bg-violet-700 p-2 rounded-3xl`} type="submit">Submit</button>*/}
             </form>
             {formErrors && (
-                <div style={{ color: "red" }}>
+                <div style={{color: "red"}}>
                     {formErrors.map((error, index) => (
                         <p key={index}>{error.message}</p>
                     ))}
                 </div>
             )}
-            <BuilderLoader/>
-        </div>
+        </>
+
 
     );
 };

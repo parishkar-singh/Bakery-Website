@@ -21,6 +21,7 @@
     "framer-motion": "^11.0.28",
     "gsap": "^3.12.5",
     "locomotive-scroll": "^4.1.4",
+    "lucide-react": "^0.368.0",
     "path": "^0.12.7",
     "postcss-cli": "^11.0.0",
     "react": "^18.2.0",

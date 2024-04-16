@@ -68,7 +68,7 @@ const Navbar: React.FC<NavbarProps> = React.memo(() => {
                     </Bounce>
                     <Bounce whileTapCustom={0.7}>
                         <a draggable={false} href="/">
-                            <h1 className={`p-4 bg-gradient-to-r from-violet-950 via-purple-800 to-violet-950 bg-clip-text text-transparent font-sonsie text-5xl select-none`}>Tasty</h1>
+                            <h1 className={`p-4 bg-gradient-to-r from-violet-950 via-purple-800 to-violet-950 bg-clip-text text-transparent font-sonsie text-5xl select-none`}>Biskits</h1>
                         </a>
                     </Bounce>
                     <Bounce>

@@ -7,6 +7,11 @@ const Home: React.FC = React.memo(() => {
         <>
             <Banner/>
             <Banner/>
+            <Banner/>
+            <Banner/>
+            <Banner/>
+            <Banner/>
+            <Banner/>
             {/*<Banner/>*/}
             {/*<Banner/>*/}
             {/*<Banner/>*/}

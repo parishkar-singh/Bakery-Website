@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import AuthButton from "../Components/Buttons/AuthButton";
 import Input from "../Components/Inputs/Input";
-import DarkModeButton from "@/Components/Buttons/DarkModeButton.tsx";
 
 const SignIn: React.FC<{ handleSwitch: () => void }> = ({ handleSwitch }) => {
     function handleSignIn(): void {
@@ -49,7 +48,6 @@ const Auth: React.FC = () => {
 
   return (
     <div className="flex bg-white dark:bg-black text-black dark:text-white flex-col justify-center items-center w-screen h-screen gap-4">
-        <DarkModeButton/>
       <h1 className="font-bold text-3xl md:text-5xl">SprintV Sandbox</h1>
       {activeComponent === "SignIn" ? <SignIn handleSwitch={handleSwitch} /> : <SignUp handleSwitch={handleSwitch} />}
     </div>

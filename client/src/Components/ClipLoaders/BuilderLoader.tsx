@@ -23,7 +23,7 @@ const loadingStates = [
 const BuilderLoader:React.FunctionComponent = ():React.ReactNode => {
     const [loading, setLoading] = useState(false);
     return (
-        <div className="w-full h-[60vh] flex items-center justify-center">
+        <div className="flex items-center justify-center">
             <MultiStepLoader loadingStates={loadingStates} loading={loading} duration={2000}/>
             <button
                 onClick={() => setLoading(true)}
