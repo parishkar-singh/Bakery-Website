@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import {z} from "zod";
-import BuilderFormInput from "@/Components/Cards/BuilderFormInput.tsx";
+import BuilderFormInput from "@/Components/Inputs/BuilderFormInput.tsx";
 import {motion} from "framer-motion";
-import BuilderFormShapeButton from "../Cards/BannerFormShapeButton";
-import BannerFormTemperatureControl from "@/Components/Cards/BannerFormTemperatureControl.tsx";
+import BuilderFormShapeButton from "../Buttons/BuilderFormShapeButton.tsx";
+import BuilderFormTemperatureControl from "@/Components/Buttons/BuilderFormTemperatureControl.tsx";
 
 const schema = z.object({
     NutsQuantity: z.number().min(0),
@@ -14,7 +14,7 @@ const schema = z.object({
     Temperature: z.number().min(100)
 });
 
-const BuilderForm: React.FunctionComponent = (): React.ReactNode => {
+const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
     const [formValues, setFormValues] = useState({
         Temperature: 100,
         NutsQuantity: 69,
@@ -25,7 +25,7 @@ const BuilderForm: React.FunctionComponent = (): React.ReactNode => {
     });
     const [formErrors, setFormErrors] = useState<z.ZodIssue[] | null>(null);
 
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSubmit = (event: React.FormEvent): void => {
         event.preventDefault();
         try {
             schema.parse(formValues);
@@ -37,13 +37,13 @@ const BuilderForm: React.FunctionComponent = (): React.ReactNode => {
         }
     };
 
-    const handleInputChange = (name: string, value: number) => {
+    const handleInputChange = (name: string, value: number): void => {
         setFormValues({
             ...formValues,
             [name]: value,
         });
     };
-    const handleTemperatureChange = (temperature: number) => {
+    const handleTemperatureChange = (temperature: number): void => {
         setFormValues({
             ...formValues,
             Temperature: temperature,
@@ -55,15 +55,25 @@ const BuilderForm: React.FunctionComponent = (): React.ReactNode => {
             <form
                 className="flex justify-center items-center w-full h-screen " onSubmit={handleSubmit}>
                 {/*Left ones*/}
-                <div className={`flex flex-col h-full w-full`}>
-                    <div className={`flex w-full h-full`}>
+                <motion.div
+                    initial={{scale: .8, y: 2160}}
+                    animate={{scale: 1, y: 0}}
+                    transition={{
+                        type: "spring",
+                        stiffness: 50,
+                        damping: 15,
+                        duration: 0.5
+                    }}
+                    className={`flex flex-col h-full w-full`}>
+                    <div
+                        className={`flex w-full h-full`}>
                         <BuilderFormShapeButton
                             name="Shape"
                             value={formValues.FiberQuantity}
                             onChange={handleInputChange}
                             Label={`Shape`}
-                            Background={'orange'} delay={.2}/>
-                        <BannerFormTemperatureControl
+                            Background={'orange'}/>
+                        <BuilderFormTemperatureControl
                             value={formValues.Temperature}
                             onChange={handleTemperatureChange}
                             maxValue={200}
@@ -78,8 +88,6 @@ const BuilderForm: React.FunctionComponent = (): React.ReactNode => {
                             Label={`Fiber`}
                             image={`/builder/fiber.png`}
                             Background={'yellow'}
-                            delay={.05}
-
                         />
 
                         <BuilderFormInput
@@ -89,7 +97,6 @@ const BuilderForm: React.FunctionComponent = (): React.ReactNode => {
                             Label={'Sugar'}
                             Background={'green'}
                             image={`/builder/sugar.png`}
-                            delay={.1}
                         />
                         <BuilderFormInput
                             name="OilQuantity"
@@ -98,21 +105,27 @@ const BuilderForm: React.FunctionComponent = (): React.ReactNode => {
                             Label={'Oil'}
                             Background={'pink'}
                             image={`/builder/oil.png`}
-                            delay={.2}
                         />
                     </div>
-                </div>
+                </motion.div>
                 {/*Right ones */}
-                <div className={`flex flex-col w-full h-full`}>
+                <motion.div
+                    initial={{scale: 0, x: 1080}}
+                    animate={{scale: 1, x: 0}}
+                    transition={{
+                        type: "spring",
+                        stiffness: 50,
+                        damping: 15,
+                        duration: 0.5
+                    }}
+                    className={`flex flex-col w-full h-full`}>
                     <BuilderFormInput
                         name="NutsQuantity"
                         value={formValues.NutsQuantity}
                         onChange={handleInputChange}
                         Label={'Nuts'}
-                        delay={.2}
                         Background={'red'}
                         image={`/builder/nuts.png`}
-
                     />
 
                     <BuilderFormInput
@@ -120,13 +133,11 @@ const BuilderForm: React.FunctionComponent = (): React.ReactNode => {
                         value={formValues.SweetBakingSoda}
                         onChange={handleInputChange}
                         Label={'Soda'}
-                        delay={.2}
                         image={`/builder/soda.png`}
                         Background={'blue'}
                     />
                     <motion.button type="submit" whileTap={{scale: 2, borderRadius: "100%"}}
-                                   initial={{scale: 0, x: 2160}}
-                                   animate={{scale: 1, x: 0}}
+
                                    transition={{
                                        type: "spring",
                                        stiffness: 50,
@@ -137,7 +148,7 @@ const BuilderForm: React.FunctionComponent = (): React.ReactNode => {
                         BakeUp
                     </motion.button>
                     {/*<BuilderLoader/>*/}
-                </div>
+                </motion.div>
 
                 {/*<button className={`text-white bg-violet-700 p-2 rounded-3xl`} type="submit">Submit</button>*/}
             </form>
@@ -152,6 +163,6 @@ const BuilderForm: React.FunctionComponent = (): React.ReactNode => {
 
 
     );
-};
+});
 
 export default BuilderForm;

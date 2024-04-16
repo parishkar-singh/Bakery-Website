@@ -12,10 +12,9 @@ interface InputProps {
     Background: string;
     Label: string;
     onChange: (name: string, value: number) => void;
-    delay: number;
 }
 
-const BuilderFormShapeButton: React.FC<InputProps> = React.memo(({ name, value, delay, onChange, Background, Label }) => {
+const BuilderFormShapeButton: React.FC<InputProps> = React.memo(({ name, value, onChange, Background, Label }) => {
     const BuilderFormInputBackgroundClass: string = ColorClassMap[Background] || 'bg-gray-500';
 
     // Define the available shapes and their corresponding icons
@@ -42,14 +41,14 @@ const BuilderFormShapeButton: React.FC<InputProps> = React.memo(({ name, value, 
 
     return (
         <motion.div
-            initial={{scale: 0.5, x: 2160}}
-            animate={{scale: 1, x: 0}}
+            whileTap={{ scale: 2, borderRadius: "100%" }}
+            initial={{scale: 0 ,y:2160}}
+            animate={{scale: 1 ,y:0}}
             transition={{
                 type: "spring",
                 stiffness: 50,
                 damping: 15,
-                duration: 0.5,
-                delay: delay ? delay : 0.5
+                duration: 0.5
             }}
             className={`relative select-none w-full h-full flex flex-col justify-center items-center group `}
         >

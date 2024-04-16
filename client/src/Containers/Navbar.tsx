@@ -14,34 +14,32 @@ interface navMotionProps {
 
 
 const Navbar: React.FC<NavbarProps> = React.memo(() => {
-    const theme = useSelector((state: RootState) => shallowEqual);
+    useSelector((state: RootState) => shallowEqual);
     const [isExpanded, setIsExpanded] = useState(false);
-    const buttonClass = `font-sonsie text-xs md:text-xl font-black`
+    const buttonClass = `font-sonsie text-xs md:text-2xl font-black`
 
     const handleImageHover = (e: any) => {
         e.stopPropagation();
         e.preventDefault();
     }
-
-
     return (
-        <motion.div className={'overflow-visible  fixed top-0 left-0 w-screen select-none  transition-100 ease-in'}
+        <motion.div className={'select-none overflow-visible fixed top-0 left-0 w-screen transition-100 ease-in'}
                     initial={{scale: 0}}
                     animate={{scale: 1}}
+                    whileTap={{
+                        scale: 1.1,
+                        borderRadius: "100%",
+                        cursor: "grabbing"
+                    }}
+                    whileHover={{scale: 1}}
                     transition={{
                         type: "spring",
                         stiffness: 300,
                         damping: 10
                     }}
-                    whileHover={{scale: 1}}
                     style={{
                         borderRadius: 30,
                         cursor: "grab",
-                    }}
-                    whileTap={{
-                        scale: 1.1,
-                        borderRadius: "100%",
-                        cursor: "grabbing"
                     }}
                     drag
                     dragConstraints={{top: 0, right: 0, bottom: 0, left: 0}}

@@ -25,7 +25,7 @@ const BannerCard: React.FunctionComponent<BannerCardProps> = React.memo(({ Backg
         >
             <img draggable="false" className="absolute  group-hover:scale-125 w-full h-full object-contain filter group-hover:blur-lg transition duration-500 ease-in-out" src={Image} alt="" />
             <Bounce whileTapCustom={0.5}>
-                <h1 className="relative font-sonsie group-hover:scale-125 transition duration-200 text-5xl ">{Heading}</h1>
+                <h1 className="relative drop-shadow-4xl font-sonsie group-hover:scale-125 transition duration-200 text-5xl ">{Heading}</h1>
             </Bounce>
         </motion.div>
     );
