@@ -27,7 +27,7 @@ const App: React.FunctionComponent = (): React.ReactNode => {
         };
     }, []);
     return (
-        <div className="relative bg-secondary flex overflow-clip text-white flex-col min-h-screen max-w-screen ">
+        <div className="relative bg-violet-950 flex overflow-clip text-white flex-col min-h-screen max-w-screen ">
             <Router>
                     <Routes>
                         <Route path="/" element={<Home/>}/>

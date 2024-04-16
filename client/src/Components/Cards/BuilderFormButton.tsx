@@ -32,7 +32,7 @@ const BuilderFormButton: React.FC<InputProps> = React.memo(({ name, value,delay,
                 duration:.5,
                 delay:delay?delay:0.5
             }}
-            className={`w-full h-full flex flex-col justify-center items-center group   ${BuilderFormInputBackgroundClass}`}>
+            className={` select-none w-full h-full flex flex-col justify-center items-center group   ${BuilderFormInputBackgroundClass}`}>
             <span className="font-sonsie text-4xl text-white">{Label}</span>
             {Icon && <Icon className="h-44 w-44" />}
         </motion.div>

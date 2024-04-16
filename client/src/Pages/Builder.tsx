@@ -8,7 +8,6 @@ const Builder: React.FunctionComponent = () => {
     return (
         <>
             <BuilderForm/>
-
         </>
     );
 };

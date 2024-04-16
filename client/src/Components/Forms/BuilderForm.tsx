@@ -1,11 +1,9 @@
 import React, {useState} from "react";
 import {z} from "zod";
 import BuilderFormInput from "@/Components/Cards/BuilderFormInput.tsx";
-import BuilderLoader from "@/Components/ClipLoaders/BuilderLoader.tsx";
-import Bounce from "@/Motion/Bounce.tsx";
 import {motion} from "framer-motion";
-import BuilderFormButton from "@/Components/Cards/BuilderFormButton.tsx";
-import {Shapes, ThermometerSnowflake} from "lucide-react";
+import BuilderFormShapeButton from "../Cards/BannerFormShapeButton";
+import BannerFormTemperatureControl from "@/Components/Cards/BannerFormTemperatureControl.tsx";
 
 const schema = z.object({
     NutsQuantity: z.number().min(0),
@@ -13,10 +11,12 @@ const schema = z.object({
     FiberQuantity: z.number().min(0),
     SugarQuantity: z.number().min(0),
     OilQuantity: z.number().min(0),
+    Temperature: z.number().min(100)
 });
 
 const BuilderForm: React.FunctionComponent = (): React.ReactNode => {
     const [formValues, setFormValues] = useState({
+        Temperature: 100,
         NutsQuantity: 69,
         SweetBakingSoda: 120,
         FiberQuantity: 70,
@@ -43,6 +43,12 @@ const BuilderForm: React.FunctionComponent = (): React.ReactNode => {
             [name]: value,
         });
     };
+    const handleTemperatureChange = (temperature: number) => {
+        setFormValues({
+            ...formValues,
+            Temperature: temperature,
+        });
+    };
 
     return (
         <>
@@ -51,20 +57,18 @@ const BuilderForm: React.FunctionComponent = (): React.ReactNode => {
                 {/*Left ones*/}
                 <div className={`flex flex-col h-full w-full`}>
                     <div className={`flex w-full h-full`}>
-                        <BuilderFormButton
+                        <BuilderFormShapeButton
                             name="Shape"
                             value={formValues.FiberQuantity}
                             onChange={handleInputChange}
                             Label={`Shape`}
-                            icon={Shapes}
                             Background={'orange'} delay={.2}/>
-                        <BuilderFormButton
-                            name="TemparatureQuantity"
-                            value={formValues.OilQuantity}
-                            onChange={handleInputChange}
-                            Label={'Temperature'}
-                            Background={'teal'}
-                            icon={ThermometerSnowflake} delay={.3}/>
+                        <BannerFormTemperatureControl
+                            value={formValues.Temperature}
+                            onChange={handleTemperatureChange}
+                            maxValue={200}
+                            minValue={100}
+                            step={10}/>
                     </div>
                     <div className={`flex w-full h-full`}>
                         <BuilderFormInput
@@ -132,7 +136,7 @@ const BuilderForm: React.FunctionComponent = (): React.ReactNode => {
                                    className={`w-full h-full bg-violet-700 flex font-sonsie text-6xl justify-center items-center`}>
                         BakeUp
                     </motion.button>
-                    <BuilderLoader/>
+                    {/*<BuilderLoader/>*/}
                 </div>
 
                 {/*<button className={`text-white bg-violet-700 p-2 rounded-3xl`} type="submit">Submit</button>*/}
