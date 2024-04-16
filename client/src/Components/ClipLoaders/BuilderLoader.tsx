@@ -1,40 +1,30 @@
-import React, { useState } from "react";
-import { IconSquareRoundedX } from "@tabler/icons-react";
+import React, {useState} from "react";
+import {IconSquareRoundedX} from "@tabler/icons-react";
 import {MultiStepLoader} from "@/Components/ClipLoaders/Loader.tsx";
 
 const loadingStates = [
     {
-        text: "Buying a condo",
+        text: "Adding Nuts",
     },
     {
-        text: "Travelling in a flight",
+        text: "Stiring with Sweet Baking soda",
     },
     {
-        text: "Meeting Tyler Durden",
+        text: "Fibers added",
     },
     {
-        text: "He makes soap",
+        text: "Sweetifying",
     },
     {
-        text: "We goto a bar",
-    },
-    {
-        text: "Start a fight",
-    },
-    {
-        text: "We like it",
-    },
-    {
-        text: "Welcome to F**** C***",
+        text: "Oils added",
     },
 ];
 
-export function MultiStepLoaderDemo() {
+const BuilderLoader:React.FunctionComponent = ():React.ReactNode => {
     const [loading, setLoading] = useState(false);
     return (
         <div className="w-full h-[60vh] flex items-center justify-center">
-            <MultiStepLoader loadingStates={loadingStates} loading={loading} duration={2000} />
-
+            <MultiStepLoader loadingStates={loadingStates} loading={loading} duration={2000}/>
             <button
                 onClick={() => setLoading(true)}
                 className="bg-[#39C3EF] hover:bg-[#39C3EF]/90 text-black mx-auto text-sm md:text-base transition font-medium duration-200 h-10 rounded-lg px-8 flex items-center justify-center"
@@ -51,9 +41,11 @@ export function MultiStepLoaderDemo() {
                     className="fixed top-4 right-4 text-black dark:text-white z-[120]"
                     onClick={() => setLoading(false)}
                 >
-                    <IconSquareRoundedX className="h-10 w-10" />
+                    <IconSquareRoundedX className="h-10 w-10"/>
                 </button>
             )}
         </div>
     );
 }
+
+export default BuilderLoader;

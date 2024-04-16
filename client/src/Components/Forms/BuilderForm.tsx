@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { z } from "zod";
 import BuilderFormInput from "@/Components/Inputs/BuilderFormInput.tsx";
+import BuilderLoader from "@/Components/ClipLoaders/BuilderLoader.tsx";
 
 const schema = z.object({
     nutsQuantity: z.number().min(0),
@@ -41,6 +42,7 @@ const BuilderForm: React.FunctionComponent = (): React.ReactNode => {
 
     return (
         <div className=" mt-40 flex flex-col">
+
             <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
                 <span>Nuts</span>
                 <BuilderFormInput
@@ -81,7 +83,9 @@ const BuilderForm: React.FunctionComponent = (): React.ReactNode => {
                     ))}
                 </div>
             )}
+            <BuilderLoader/>
         </div>
+
     );
 };
 
