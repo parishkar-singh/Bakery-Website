@@ -5,8 +5,8 @@ const Banner: React.FunctionComponent = React.memo(() => {
     return (
         <div className="flex justify-center  h-screen w-full">
             {/* Left side */}
-            <div className=" flex flex-col  h-full w-full  ">
-                <BannerCard Image="/biskit.png" Heading="Crispes" Background={"yellow"} />
+            <div className=" flex flex-col h-full w-full">
+                <BannerCard Image="/biskit.png" Heading="Must Try's" Background={"yellow"} />
                 <div className={`flex h-full`}>
                 <BannerCard Image="/jelly.png" Heading="Jelly's" Background={"green"} />
                 <BannerCard Image="/jelly.png" Heading="Cookie's" Background={"purple"} />

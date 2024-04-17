@@ -1,20 +1,20 @@
 import React, {useEffect, useState} from "react";
-import {motion} from "framer-motion";
 import {InventoryItem} from "@/Types/Inventory.ts";
 import {getAllInventoryItems} from "@/Api/Inventory.ts";
-
-
+import {shadowTextLg, shadowTextMd} from "@/Utils/CssModules.ts";
 
 
 const InventoryInfo: React.FunctionComponent = React.memo(() => {
     const [inventoryItems, setInventoryItems] = useState<InventoryItem[]>([]);
-    function capitalizeFirstLetter(string:any) {
+
+    function capitalizeFirstLetter(string: any) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
-    useEffect(() => {
-        const fetchIngredients = async () => {
+
+    useEffect((): void => {
+        const fetchIngredients = async (): Promise<void> => {
             try {
-                const response=await getAllInventoryItems();
+                const response = await getAllInventoryItems();
                 setInventoryItems(response)
             } catch (error) {
                 console.error("Error fetching trending data:", error);
@@ -24,44 +24,36 @@ const InventoryInfo: React.FunctionComponent = React.memo(() => {
         fetchIngredients();
     }, []);
     return (
-        <motion.div
-            whileTap={{scale: 1.1}}
-            initial={{scale: 0, y: 2160}}
-            animate={{scale: 1, y: 0}}
-            transition={{
-                type: "spring",
-                stiffness: 50,
-                damping: 15,
-                duration: 0.1
-            }}
-            className={`relative overflow-clip select-none  w-full h-full flex flex-col justify-center items-center  group `}
-        >
+        <div
+            className={`relative overflow-clip select-none w-1/2 h-full flex flex-col justify-center items-center  group `}>
             <img draggable={false}
                  className={'absolute  object-cover group-hover:scale-125 transition duration-500 group-hover:blur-lg  h-full w-full '}
                  src={'/builder/inventory.jpg'} alt=""/>
-            <span className=" drop-shadow-4xl relative p-2  font-sonsie text-4xl text-white">Inventory</span>
-            <div
-                className={`relative italic flex p-6 flex-col  w-4/5   text-2xl font-black font-oswald`}>
-                <table className={`shadow-2xl drop-shadow-4xl backdrop-blur  rounded-3xl text-center`}>
-                    <thead>
-                    <tr>
+            {/*<span style={{...shadowTextMd}}*/}
+            {/*      // className=" drop-shadow-4xl relative p-2  font-sonsie text-4xl text-white">Inventory</span>*/}
+            <div className={`relative italic flex  flex-col h-full w-full  text-2xl font-black font-oswald`}>
+                <table style={{...shadowTextMd}} className={`bg-black/60  h-full w-full  text-center`}>
+                    <thead className={ `border-b border-b-gray-200`}>
+                    <tr >
                         <th>Name</th>
                         <th>Cost</th>
-                        <th>Calories</th>
+                        <th>Kcal</th>
+                        <th>Stock</th>
                     </tr>
                     </thead>
                     <tbody>
                     {inventoryItems.map((ingredient, index) => (
-                        <tr key={index}>
-                            <td>{capitalizeFirstLetter(ingredient.name)}</td>
-                            <td>${ingredient.cost}</td>
-                            <td>{ingredient.calories}/100{ingredient.unit}</td>
+                        <tr  key={index}>
+                            <td style={{...shadowTextLg}}>{capitalizeFirstLetter(ingredient.name)}</td>
+                            <td style={{...shadowTextLg}}>${ingredient.cost}</td>
+                            <td style={{...shadowTextLg}}>{ingredient.calories}</td>
+                            <td style={{...shadowTextLg}}>{ingredient.stock}</td>
                         </tr>
                     ))}
                     </tbody>
                 </table>
             </div>
-        </motion.div>
+        </div>
     );
 });
 

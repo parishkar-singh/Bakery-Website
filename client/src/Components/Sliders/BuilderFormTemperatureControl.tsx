@@ -26,8 +26,6 @@ const BuilderFormTemperatureControl: React.FC<TemperatureControlProps> = React.m
     return (
         <motion.div
             {...bind()}
-            initial={{scale: 0, y: 2160}}
-            animate={{scale: 1, y: 0}}
             transition={{
                 type: "spring",
                 stiffness: 50,

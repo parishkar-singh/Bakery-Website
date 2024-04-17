@@ -9,6 +9,7 @@ import RecipeStats from "@/Components/Info/RecipeStats.tsx";
 import BuilderLoader from "@/Components/ClipLoaders/BuilderLoader.tsx";
 
 const schema = z.object({
+    Shape:z.enum(["star","triangle","circle","square"]),
     NutsQuantity: z.number().min(0),
     SweetBakingSoda: z.number().min(0),
     FiberQuantity: z.number().min(0),
@@ -19,6 +20,7 @@ const schema = z.object({
 
 const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
     const [formValues, setFormValues] = useState({
+        Shape:'star',
         Temperature: 150,
         NutsQuantity: 69,
         SweetBakingSoda: 120,
@@ -40,7 +42,6 @@ const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
             }
         }
     };
-
     const handleInputChange = (name: string, value: number): void => {
         setFormValues({
             ...formValues,
@@ -53,6 +54,12 @@ const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
             Temperature: temperature,
         });
     };
+    const handleShapeChange = (shape: string): void => {
+        setFormValues({
+            ...formValues,
+            Shape: shape,
+        });
+    };
 
     return (
         <>
@@ -60,31 +67,33 @@ const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
                 className="flex justify-center items-center w-full h-screen " onSubmit={handleSubmit}>
                 {/*Left ones*/}
                 <motion.div
-                    initial={{scale: .8, y: 2160}}
-                    animate={{scale: 1, y: 0}}
-                    transition={{
-                        type: "spring",
-                        stiffness: 50,
-                        damping: 15,
-                        duration: 0.5
-                    }}
                     className={`flex flex-col h-full w-full`}>
                     <div
                         className={`flex w-full h-full`}>
                         <BuilderFormShapeButton
-                            name="Shape"
-                            value={formValues.FiberQuantity}
+                            value={formValues.Shape}
+                            onChange={handleShapeChange}
+                        />
+                        <BuilderFormInput
+                            name={`NutsQuantity`}
+                            value={formValues.NutsQuantity}
                             onChange={handleInputChange}
-                            Label={`Shape`}
-                             Background={'orange'}/>
-                        <BuilderFormTemperatureControl
-                            value={formValues.Temperature}
-                            onChange={handleTemperatureChange}
-                            step={10}/>
+                            Label={'Nuts'}
+                            Background={'orange'}
+                            image={`/builder/nuts.jpg`}
+                        />
+                        <BuilderFormInput
+                            name={`SweetBakingSoda`}
+                            value={formValues.SweetBakingSoda}
+                            onChange={handleInputChange}
+                            Label={'Soda'}
+                            image={`/builder/soda.jpg`}
+                            Background={'blue'}
+                        />
                     </div>
                     <div className={`flex w-full h-full`}>
                         <BuilderFormInput
-                            name="FiberQuantity"
+                            name={`FiberQuantity`}
                             value={formValues.FiberQuantity}
                             onChange={handleInputChange}
                             Label={`Fiber`}
@@ -93,7 +102,7 @@ const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
                         />
 
                         <BuilderFormInput
-                            name="SugarQuantity"
+                            name={`SugarQuantity`}
                             value={formValues.SugarQuantity}
                             onChange={handleInputChange}
                             Label={'Sugar'}
@@ -101,7 +110,7 @@ const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
                             image={`/builder/sugar.jpg`}
                         />
                         <BuilderFormInput
-                            name="OilQuantity"
+                            name={`OilQuantity`}
                             value={formValues.OilQuantity}
                             onChange={handleInputChange}
                             Label={'Oil'}
@@ -112,55 +121,48 @@ const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
                 </motion.div>
                 {/*Right ones */}
                 <motion.div
-                    initial={{scale: 0, x: 1080}}
+                    initial={{scale: 1, x: 1080}}
                     animate={{scale: 1, x: 0}}
                     transition={{
                         type: "spring",
                         stiffness: 50,
                         damping: 15,
-                        duration: 0.5
+                        duration: 0.1
                     }}
-                    className={`flex flex-col w-full h-full`}>
-                    <div className={`flex w-full h-1/2`}>
-                    <BuilderFormInput
-                        name="NutsQuantity"
-                        value={formValues.NutsQuantity}
-                        onChange={handleInputChange}
-                        Label={'Nuts'}
-                        Background={'orange'}
-                        image={`/builder/nuts.jpg`}
-                    />
-                    <BuilderFormInput
-                        name="SweetBakingSoda"
-                        value={formValues.SweetBakingSoda}
-                        onChange={handleInputChange}
-                        Label={'Soda'}
-                        image={`/builder/soda.jpg`}
-                        Background={'blue'}
-                    />
-                    </div>
-                    <div className={`flex w-full`}>
-                        <InventoryInfo/>
+                    className={`flex flex-col w-1/3 h-full`}>
+                    {/*right upside*/}
+                    <div className={`flex  w-full h-1/2`}>
                         <RecipeStats
                             value={formValues.FiberQuantity}
                             onChange={handleInputChange}
                             Background={'orange'}/>
                     </div>
-                    <motion.button type="submit" whileTap={{scale: 2, borderRadius: "100%"}}
+                    {/*right downside*/}
+                    <div className={`flex w-full`}>
+                        <BuilderFormTemperatureControl
+                            value={formValues.Temperature}
+                            onChange={handleTemperatureChange}
+                        />
+                    </div>
+
+                    <motion.button type="submit" whileTap={{scale: .5}}
                                    transition={{
                                        type: "spring",
-                                       stiffness: 50,
-                                       damping: 15,
-                                       duration: 0.5
+                                       stiffness: 150,
+                                       damping: 10,
+                                       duration: 0.1
                                    }}
-                                   className={`w-full h-1/3 bg-violet-700 flex font-sonsie text-6xl justify-center items-center`}>
+                                   className={`w-1/2 h-1/2 bg-violet-700 flex font-sonsie text-6xl justify-center items-center`}>
                         BakeUp
                     </motion.button>
-                    {/*<BuilderLoader/>*/}
                 </motion.div>
 
                 {/*<button className={`text-white bg-violet-700 p-2 rounded-3xl`} type="submit">Submit</button>*/}
             </form>
+            <InventoryInfo/>
+
+            <BuilderLoader/>
+
             {formErrors && (
                 <div style={{color: "red"}}>
                     {formErrors.map((error, index) => (

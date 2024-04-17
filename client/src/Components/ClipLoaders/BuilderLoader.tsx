@@ -24,7 +24,7 @@ const BuilderLoader:React.FunctionComponent = ():React.ReactNode => {
     const [loading, setLoading] = useState(false);
     return (
         <div className="flex items-center justify-center">
-            <MultiStepLoader loadingStates={loadingStates} loading={loading} duration={2000}/>
+            <MultiStepLoader loadingStates={loadingStates} loading={loading} duration={500}/>
             <button
                 onClick={() => setLoading(true)}
                 className="bg-[#39C3EF] hover:bg-[#39C3EF]/90 text-black mx-auto text-sm md:text-base transition font-medium duration-200 h-10 rounded-lg px-8 flex items-center justify-center"
