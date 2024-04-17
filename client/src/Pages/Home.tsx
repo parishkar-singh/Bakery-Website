@@ -7,7 +7,7 @@ const Home: React.FC = React.memo(() => {
         <>
             <Banner/>
         </>
-    );
-});
+    )
+})
 
 export default Home;

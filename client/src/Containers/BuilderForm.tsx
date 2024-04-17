@@ -2,8 +2,10 @@ import React, {useState} from "react";
 import {z} from "zod";
 import BuilderFormInput from "@/Components/Inputs/BuilderFormInput.tsx";
 import {motion} from "framer-motion";
-import BuilderFormShapeButton from "../Buttons/BuilderFormShapeButton.tsx";
+import BuilderFormShapeButton from "../Components/Buttons/BuilderFormShapeButton.tsx";
 import BuilderFormTemperatureControl from "@/Components/Buttons/BuilderFormTemperatureControl.tsx";
+import InventoryInfo from "@/Components/Info/InventoryInfo.tsx";
+import RecipeStats from "@/Components/Info/RecipeStats.tsx";
 
 const schema = z.object({
     NutsQuantity: z.number().min(0),
@@ -72,7 +74,7 @@ const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
                             value={formValues.FiberQuantity}
                             onChange={handleInputChange}
                             Label={`Shape`}
-                            Background={'orange'}/>
+                             Background={'orange'}/>
                         <BuilderFormTemperatureControl
                             value={formValues.Temperature}
                             onChange={handleTemperatureChange}
@@ -119,15 +121,15 @@ const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
                         duration: 0.5
                     }}
                     className={`flex flex-col w-full h-full`}>
+                    <div className={`flex w-full h-1/2`}>
                     <BuilderFormInput
                         name="NutsQuantity"
                         value={formValues.NutsQuantity}
                         onChange={handleInputChange}
                         Label={'Nuts'}
-                        Background={'red'}
+                        Background={'orange'}
                         image={`/builder/nuts.png`}
                     />
-
                     <BuilderFormInput
                         name="SweetBakingSoda"
                         value={formValues.SweetBakingSoda}
@@ -136,15 +138,24 @@ const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
                         image={`/builder/soda.png`}
                         Background={'blue'}
                     />
+                    </div>
+                    <div className={`flex w-full`}>
+                        <InventoryInfo/>
+                        <RecipeStats
+                            name="Shape"
+                            value={formValues.FiberQuantity}
+                            onChange={handleInputChange}
+                            Label={`Shape`}
+                            Background={'orange'}/>
+                    </div>
                     <motion.button type="submit" whileTap={{scale: 2, borderRadius: "100%"}}
-
                                    transition={{
                                        type: "spring",
                                        stiffness: 50,
                                        damping: 15,
                                        duration: 0.5
                                    }}
-                                   className={`w-full h-full bg-violet-700 flex font-sonsie text-6xl justify-center items-center`}>
+                                   className={`w-full h-1/3 bg-violet-700 flex font-sonsie text-6xl justify-center items-center`}>
                         BakeUp
                     </motion.button>
                     {/*<BuilderLoader/>*/}

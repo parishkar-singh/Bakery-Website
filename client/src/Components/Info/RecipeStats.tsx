@@ -14,7 +14,7 @@ interface InputProps {
     onChange: (name: string, value: number) => void;
 }
 
-const BuilderFormShapeButton: React.FC<InputProps> = React.memo(({ name, value, onChange, Background, Label }) => {
+const RecipeStats: React.FC<InputProps> = React.memo(({ name, value, onChange, Background, Label }) => {
     const BuilderFormInputBackgroundClass: string = ColorClassMap[Background] || 'bg-gray-500';
 
     // Define the available shapes and their corresponding icons
@@ -53,7 +53,7 @@ const BuilderFormShapeButton: React.FC<InputProps> = React.memo(({ name, value, 
             className={`relative select-none w-full h-full flex flex-col justify-center items-center group `}
         >
             <img draggable={false}
-                 className={'absolute  object-cover group-hover:scale-125 transition duration-500 group-hover:blur-lg  h-full w-full '}
+                 className={'absolute object-cover group-hover:scale-125 transition duration-500 group-hover:blur-lg  h-full w-full '}
                  src={'/builder/shapes.jpg'} alt=""/>
             <span className=" drop-shadow-4xl relative font-sonsie text-4xl text-white">{Label}</span>
             {Icon && (
@@ -65,4 +65,4 @@ const BuilderFormShapeButton: React.FC<InputProps> = React.memo(({ name, value, 
     );
 });
 
-export default BuilderFormShapeButton;
+export default RecipeStats;
