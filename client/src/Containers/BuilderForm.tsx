@@ -3,9 +3,10 @@ import {z} from "zod";
 import BuilderFormInput from "@/Components/Inputs/BuilderFormInput.tsx";
 import {motion} from "framer-motion";
 import BuilderFormShapeButton from "../Components/Buttons/BuilderFormShapeButton.tsx";
-import BuilderFormTemperatureControl from "@/Components/Buttons/BuilderFormTemperatureControl.tsx";
+import BuilderFormTemperatureControl from "@/Components/Sliders/BuilderFormTemperatureControl.tsx";
 import InventoryInfo from "@/Components/Info/InventoryInfo.tsx";
 import RecipeStats from "@/Components/Info/RecipeStats.tsx";
+import BuilderLoader from "@/Components/ClipLoaders/BuilderLoader.tsx";
 
 const schema = z.object({
     NutsQuantity: z.number().min(0),
@@ -18,13 +19,14 @@ const schema = z.object({
 
 const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
     const [formValues, setFormValues] = useState({
-        Temperature: 100,
+        Temperature: 150,
         NutsQuantity: 69,
         SweetBakingSoda: 120,
         FiberQuantity: 70,
         SugarQuantity: 90,
         OilQuantity: 50,
     });
+
     const [formErrors, setFormErrors] = useState<z.ZodIssue[] | null>(null);
 
     const handleSubmit = (event: React.FormEvent): void => {
@@ -78,8 +80,6 @@ const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
                         <BuilderFormTemperatureControl
                             value={formValues.Temperature}
                             onChange={handleTemperatureChange}
-                            maxValue={200}
-                            minValue={100}
                             step={10}/>
                     </div>
                     <div className={`flex w-full h-full`}>
@@ -88,7 +88,7 @@ const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
                             value={formValues.FiberQuantity}
                             onChange={handleInputChange}
                             Label={`Fiber`}
-                            image={`/builder/fiber.png`}
+                            image={`/builder/fiber.jpg`}
                             Background={'yellow'}
                         />
 
@@ -98,7 +98,7 @@ const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
                             onChange={handleInputChange}
                             Label={'Sugar'}
                             Background={'green'}
-                            image={`/builder/sugar.png`}
+                            image={`/builder/sugar.jpg`}
                         />
                         <BuilderFormInput
                             name="OilQuantity"
@@ -106,7 +106,7 @@ const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
                             onChange={handleInputChange}
                             Label={'Oil'}
                             Background={'pink'}
-                            image={`/builder/oil.png`}
+                            image={`/builder/oil.jpg`}
                         />
                     </div>
                 </motion.div>
@@ -128,24 +128,22 @@ const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
                         onChange={handleInputChange}
                         Label={'Nuts'}
                         Background={'orange'}
-                        image={`/builder/nuts.png`}
+                        image={`/builder/nuts.jpg`}
                     />
                     <BuilderFormInput
                         name="SweetBakingSoda"
                         value={formValues.SweetBakingSoda}
                         onChange={handleInputChange}
                         Label={'Soda'}
-                        image={`/builder/soda.png`}
+                        image={`/builder/soda.jpg`}
                         Background={'blue'}
                     />
                     </div>
                     <div className={`flex w-full`}>
                         <InventoryInfo/>
                         <RecipeStats
-                            name="Shape"
                             value={formValues.FiberQuantity}
                             onChange={handleInputChange}
-                            Label={`Shape`}
                             Background={'orange'}/>
                     </div>
                     <motion.button type="submit" whileTap={{scale: 2, borderRadius: "100%"}}

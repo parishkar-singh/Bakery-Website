@@ -11,8 +11,9 @@ import gsap from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
 import Navbar from "@/Containers/Navbar.tsx";
 import Builder from "@/Pages/Builder.tsx";
+import {createRoot} from "react-dom/client";
 
-const App: React.FunctionComponent = (): React.ReactNode => {
+const App: React.FunctionComponent = (): React.ReactElement => {
     useEffect(() => {
         const lenis:Lenis = new Lenis()
 
@@ -40,12 +41,18 @@ const App: React.FunctionComponent = (): React.ReactNode => {
     );
 
 };
+const rootContainer = document.getElementById("root") as HTMLElement;
 
-ReactDOM.render(
+if (!rootContainer) {
+    throw new Error("Root container not found");
+}
+
+const root = createRoot(rootContainer);
+
+root.render(
     <React.StrictMode>
         <Provider store={store}>
-            <App/>
+            <App />
         </Provider>
-    </React.StrictMode>,
-    document.getElementById("root")
+    </React.StrictMode>
 );
