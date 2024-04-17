@@ -25,12 +25,12 @@ const InventoryInfo: React.FunctionComponent = React.memo(() => {
     }, []);
     return (
         <div
-            className={`relative overflow-clip select-none w-1/2 h-full flex flex-col justify-center items-center  group `}>
+            className={`relative overflow-clip select-none w-full h-full flex flex-col justify-center items-center  group `}>
             <img draggable={false}
                  className={'absolute  object-cover group-hover:scale-125 transition duration-500 group-hover:blur-lg  h-full w-full '}
                  src={'/builder/inventory.jpg'} alt=""/>
             {/*<span style={{...shadowTextMd}}*/}
-            {/*      // className=" drop-shadow-4xl relative p-2  font-sonsie text-4xl text-white">Inventory</span>*/}
+            {/*      className=" drop-shadow-4xl relative p-2  font-sonsie text-4xl text-white"></span>*/}
             <div className={`relative italic flex  flex-col h-full w-full  text-2xl font-black font-oswald`}>
                 <table style={{...shadowTextMd}} className={`bg-black/60  h-full w-full  text-center`}>
                     <thead className={ `border-b border-b-gray-200`}>

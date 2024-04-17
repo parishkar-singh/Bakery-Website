@@ -7,9 +7,11 @@ import BuilderFormTemperatureControl from "@/Components/Sliders/BuilderFormTempe
 import InventoryInfo from "@/Components/Info/InventoryInfo.tsx";
 import RecipeStats from "@/Components/Info/RecipeStats.tsx";
 import BuilderLoader from "@/Components/ClipLoaders/BuilderLoader.tsx";
+import {useDispatch, useSelector} from "react-redux";
+import {setFormValues} from "@/Redux/Actions.ts";
 
 const schema = z.object({
-    Shape:z.enum(["star","triangle","circle","square"]),
+    Shape: z.enum(["star", "triangle", "circle", "square"]),
     NutsQuantity: z.number().min(0),
     SweetBakingSoda: z.number().min(0),
     FiberQuantity: z.number().min(0),
@@ -17,20 +19,28 @@ const schema = z.object({
     OilQuantity: z.number().min(0),
     Temperature: z.number().min(100)
 });
+const BuilderFormSubmit: React.FunctionComponent = React.memo((): React.ReactNode => {
+    return (
+        <>
+            <motion.button type="submit" whileTap={{scale: .5}}
+                           transition={{
+                               type: "spring",
+                               stiffness: 150,
+                               damping: 10,
+                               duration: 0.1
+                           }}
+                           className={`w-full h-full bg-violet-700 flex font-sonsie text-6xl justify-center items-center`}>
+                BakeUp
+            </motion.button>
+        </>
+    )
+})
 
 const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
-    const [formValues, setFormValues] = useState({
-        Shape:'star',
-        Temperature: 150,
-        NutsQuantity: 69,
-        SweetBakingSoda: 120,
-        FiberQuantity: 70,
-        SugarQuantity: 90,
-        OilQuantity: 50,
-    });
-
+    const dispatch = useDispatch();
+    const formValues = useSelector((state: any) => state.form);
     const [formErrors, setFormErrors] = useState<z.ZodIssue[] | null>(null);
-
+    const [previousValues, setPreviousValues] = useState({});
     const handleSubmit = (event: React.FormEvent): void => {
         event.preventDefault();
         try {
@@ -43,22 +53,33 @@ const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
         }
     };
     const handleInputChange = (name: string, value: number): void => {
-        setFormValues({
+        dispatch(setFormValues({
             ...formValues,
             [name]: value,
-        });
+        }));
     };
+
     const handleTemperatureChange = (temperature: number): void => {
-        setFormValues({
+        dispatch(setFormValues({
             ...formValues,
             Temperature: temperature,
-        });
+        }));
     };
+
     const handleShapeChange = (shape: string): void => {
-        setFormValues({
+        const defaultValues = {
+            SweetBakingSoda: 120,
+            NutsQuantity: 69,
+        };
+
+        const updatedFormValues = {
             ...formValues,
             Shape: shape,
-        });
+            SweetBakingSoda: shape !== "circle" ? defaultValues.SweetBakingSoda : 0,
+            NutsQuantity: shape !== "star" ? defaultValues.NutsQuantity : 0,
+        };
+
+        dispatch(setFormValues(updatedFormValues));
     };
 
     return (
@@ -68,6 +89,7 @@ const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
                 {/*Left ones*/}
                 <motion.div
                     className={`flex flex-col h-full w-full`}>
+                    {/*Left Upside*/}
                     <div
                         className={`flex w-full h-full`}>
                         <BuilderFormShapeButton
@@ -81,6 +103,7 @@ const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
                             Label={'Nuts'}
                             Background={'orange'}
                             image={`/builder/nuts.jpg`}
+                            disabled={formValues.Shape === "star"}
                         />
                         <BuilderFormInput
                             name={`SweetBakingSoda`}
@@ -89,8 +112,10 @@ const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
                             Label={'Soda'}
                             image={`/builder/soda.jpg`}
                             Background={'blue'}
+                            disabled={formValues.Shape === "circle"}
                         />
                     </div>
+                    {/*left downside*/}
                     <div className={`flex w-full h-full`}>
                         <BuilderFormInput
                             name={`FiberQuantity`}
@@ -133,9 +158,8 @@ const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
                     {/*right upside*/}
                     <div className={`flex  w-full h-1/2`}>
                         <RecipeStats
-                            value={formValues.FiberQuantity}
                             onChange={handleInputChange}
-                            Background={'orange'}/>
+                        />
                     </div>
                     {/*right downside*/}
                     <div className={`flex w-full`}>
@@ -144,22 +168,12 @@ const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
                             onChange={handleTemperatureChange}
                         />
                     </div>
-
-                    <motion.button type="submit" whileTap={{scale: .5}}
-                                   transition={{
-                                       type: "spring",
-                                       stiffness: 150,
-                                       damping: 10,
-                                       duration: 0.1
-                                   }}
-                                   className={`w-1/2 h-1/2 bg-violet-700 flex font-sonsie text-6xl justify-center items-center`}>
-                        BakeUp
-                    </motion.button>
+                    <InventoryInfo/>
+                    <BuilderFormSubmit/>
                 </motion.div>
 
                 {/*<button className={`text-white bg-violet-700 p-2 rounded-3xl`} type="submit">Submit</button>*/}
             </form>
-            <InventoryInfo/>
 
             <BuilderLoader/>
 

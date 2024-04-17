@@ -9,8 +9,6 @@ import {BadgeDollarSign, HandCoins, HeartPulse, Scale} from "lucide-react";
 import {shadowTextMd} from "@/Utils/CssModules.ts";
 
 interface InputProps {
-    value: number;
-    Background: string;
     onChange: (name: string, value: number) => void;
 }
 

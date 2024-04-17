@@ -14,14 +14,14 @@ interface InputProps {
 const BuilderFormShapeButton: React.FC<InputProps> = React.memo((props) => {
     // Define the available shapes and their corresponding icons
     const shapes: { [key: string]: IconType } = {
-        star: FaStar,
         square: FaSquare,
+        star: FaStar,
         triangle: BsTriangle,
         circle: FaCircle
     };
 
     // State to track the current shape
-    const [currentShape, setCurrentShape] = useState<keyof typeof shapes>("star");
+    const [currentShape, setCurrentShape] = useState<keyof typeof shapes>(props.value);
 
     const handleClick = () => {
         const shapeKeys = Object.keys(shapes);

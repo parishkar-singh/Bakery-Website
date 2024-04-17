@@ -1,11 +1,6 @@
+export const SET_FORM_VALUES = 'SET_FORM_VALUES';
 
-export const TOGGLE_THEME = 'TOGGLE_THEME';
-export const SET_ACTIVE_TAB = 'SET_ACTIVE_TAB';
-
-export const toggleTheme = () => ({
-    type: TOGGLE_THEME
-});
-export const setActiveTab = (activeTab: string) => ({
-    type: SET_ACTIVE_TAB,
-    payload: activeTab,
+export const setFormValues = (values: any) => ({
+    type: SET_FORM_VALUES,
+    payload: values,
 });

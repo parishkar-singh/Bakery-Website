@@ -10,6 +10,7 @@ interface InputProps {
     Label: string;
     image: string;
     onChange: (name: string, value: number) => void;
+    disabled?: boolean;
 }
 
 const BuilderFormInput: React.FC<InputProps> = React.memo((props) => {
@@ -28,7 +29,7 @@ const BuilderFormInput: React.FC<InputProps> = React.memo((props) => {
                 damping: 15,
                 duration: 0.1
             }}
-            className={`select-none overflow-clip relative w-full h-full flex  flex-col gap-2 justify-center items-center group  `}>
+            className={`${props.disabled? " grayscale blur-sm  backdrop-blur-sm ":" "}  select-none overflow-clip relative w-full h-full flex  flex-col gap-2 justify-center items-center group  `}>
             <img draggable={false}
                  className={'absolute group-hover:scale-125 transition duration-500 group-hover:blur-lg object-cover h-full w-full '}
                  src={props.image} alt=""/>
@@ -44,8 +45,9 @@ const BuilderFormInput: React.FC<InputProps> = React.memo((props) => {
                         inputMode="numeric"
                         draggable={false}
                         pattern="[0-9]*"
+                        disabled={props.disabled}
                     />
-                    <span style={{...shadowTextLg}} className={`relative text-xl italic font-black`}>gm</span>
+                    <span style={{...shadowTextLg}} className={`relative text-xl italic font-black`}>mg</span>
                     <span
                         style={{...shadowTextLg}}
                         className={"font-sonsie text-white drop-shadow-4xl  rounded-3xl text-6xl  relative select-none  "}>{props.Label}</span>

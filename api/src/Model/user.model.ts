@@ -27,14 +27,14 @@ export interface UserDocument extends UserInput, mongoose.Document {
 
 // Define User Schema using Mongoose Schema
 const userSchema: mongoose.Schema = new mongoose.Schema({
-    email: { type: String, required: true, unique: true },  // User's email address (required, unique)
-    name: { type: String, required: true },                // User's name (required)
-    password: { type: String, required: true },            // Hashed password (required)
-    picture: { type: String },                             // Optional: URL of user's profile picture
-}, { timestamps: true });                                   // Auto-generate timestamps for createdAt and updatedAt
+    email: {type: String, required: true, unique: true},  // User's email address (required, unique)
+    name: {type: String, required: true},                // User's name (required)
+    password: {type: String, required: true},            // Hashed password (required)
+    picture: {type: String},                             // Optional: URL of user's profile picture
+}, {timestamps: true});                                   // Auto-generate timestamps for createdAt and updatedAt
 
 // Hash and salt password before saving to database using pre-save hook
-userSchema.pre('save', async function (next) {
+userSchema.pre('save', async function (next): Promise<void> {
     let user: UserDocument = this as UserDocument;
     if (!user.isModified('password')) {
         return next();

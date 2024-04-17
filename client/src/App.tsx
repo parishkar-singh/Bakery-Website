@@ -1,21 +1,18 @@
 import React, {useEffect} from "react";
-import ReactDOM from "react-dom";
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import {Provider} from "react-redux";
-import Home from "./Pages/Home";
-import Auth from "./Pages/Auth";
 import "./globals.css";
 import store from "@/Redux/Store.ts";
 import Lenis from '@studio-freight/lenis'
 import gsap from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
 import Navbar from "@/Containers/Navbar.tsx";
-import Builder from "@/Pages/Builder.tsx";
-import {createRoot} from "react-dom/client";
+import {createRoot, Root} from "react-dom/client";
+import Routing from "@/Routes.tsx";
 
 const App: React.FunctionComponent = (): React.ReactElement => {
+    // Mounting Smooth Scroll
     useEffect(() => {
-        const lenis:Lenis = new Lenis()
+        const lenis: Lenis = new Lenis()
 
         lenis.on('scroll', ScrollTrigger.update)
 
@@ -24,35 +21,28 @@ const App: React.FunctionComponent = (): React.ReactElement => {
         })
         gsap.ticker.lagSmoothing(0)
 
-        return ():void => {
+        return (): void => {
         };
     }, []);
     return (
+        // Globals CSS Properties
         <main className="relative bg-violet-950 flex overflow-clip text-white flex-col min-h-screen max-w-screen ">
-            <Router>
-                    <Routes>
-                        <Route path="/" element={<Home/>}/>
-                        <Route path="/auth" element={<Auth/>}/>
-                        <Route path="/builder" element={<Builder/>}/>
-                    </Routes>
-            </Router>
+            <Routing/>
             <Navbar/>
         </main>
     );
 
 };
-const rootContainer = document.getElementById("root") as HTMLElement;
+const rootContainer: HTMLElement = document.getElementById("root") as HTMLElement;
 
 if (!rootContainer) {
     throw new Error("Root container not found");
 }
-
-const root = createRoot(rootContainer);
-
+const root: Root = createRoot(rootContainer);
 root.render(
     <React.StrictMode>
         <Provider store={store}>
-            <App />
+            <App/>
         </Provider>
     </React.StrictMode>
 );
