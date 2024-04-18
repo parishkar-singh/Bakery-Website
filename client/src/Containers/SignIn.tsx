@@ -51,8 +51,8 @@ const SignIn = () => {
 
     const onSubmit = async (data: CreateSessionInput) => {
         try {
-            await axios.post(`${process.env.REACT_APP_SERVER_ENDPOINT}/api/sessions/`, data, {withCredentials: true})
-            const response = await axios.get(`${process.env.REACT_APP_SERVER_ENDPOINT}/api/users/me`, {withCredentials: true})
+            await axios.post(`http://localhost:8080/api/sessions/`, data, {withCredentials: true})
+            const response = await axios.get(`http://localhost:8080/api/users/me`, {withCredentials: true})
             login(mapResponseToPayload(response.data));
             // console.log(user)
             window.location.href = '/';

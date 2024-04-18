@@ -10,3 +10,12 @@ export const getAllInventoryItems = async () => {
         throw error;
     }
 };
+export const updateInventoryItems = async (data: any) => {
+    try {
+        const response: AxiosResponse = await BakeryClient.put('/ingredients', data, {withCredentials: true});
+        return response.data;
+    } catch (error) {
+        // Handle error
+        throw error;
+    }
+}
