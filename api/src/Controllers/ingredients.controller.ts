@@ -80,3 +80,4 @@ export async function deleteIngredient(req: Request, res: Response): Promise<voi
         res.status(400).json({message: error.message});
     }
 }
+

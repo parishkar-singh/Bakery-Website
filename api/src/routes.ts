@@ -5,6 +5,8 @@ import sessionRoutes from "@/Routes/session.route";
 import ingredientsRoutes from "@/Routes/ingredients.route";
 import recipesRoutes from "@/Routes/recipe.route";
 import * as path from "path";
+import {populate} from "dotenv";
+import {populateDatabase} from "@/Database/Populate.Database";
 
 function routes(app: Express): void {
     const apiRouter: Router = Router();
@@ -14,6 +16,7 @@ function routes(app: Express): void {
     apiRouter.use('/sessions', sessionRoutes);
     apiRouter.use('/ingredients', ingredientsRoutes)
     apiRouter.use('/recipes', recipesRoutes);
+    apiRouter.use('/populate',populateDatabase)
 
     // Every route in apiRouter will be prefixed with /api
     app.use('/api', apiRouter);

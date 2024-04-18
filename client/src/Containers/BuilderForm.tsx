@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {z} from "zod";
 import BuilderFormInput from "@/Components/Inputs/BuilderFormInput.tsx";
 import {motion} from "framer-motion";
@@ -9,6 +9,7 @@ import RecipeStats from "@/Components/Info/RecipeStats.tsx";
 import BuilderLoader from "@/Components/ClipLoaders/BuilderLoader.tsx";
 import {useDispatch, useSelector} from "react-redux";
 import {setFormValues} from "@/Redux/Actions.ts";
+import {getAllInventoryItems} from "@/Api/Inventory.ts";
 
 const schema = z.object({
     Shape: z.enum(["star", "triangle", "circle", "square"]),
@@ -39,8 +40,21 @@ const BuilderFormSubmit: React.FunctionComponent = React.memo((): React.ReactNod
 const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
     const dispatch = useDispatch();
     const formValues = useSelector((state: any) => state.form);
+    const [getStats, setGetStats] = useState([]);
     const [formErrors, setFormErrors] = useState<z.ZodIssue[] | null>(null);
     const [previousValues, setPreviousValues] = useState({});
+    useEffect((): void => {
+        const fetchIngredients = async (): Promise<void> => {
+            try {
+                const response = await getAllInventoryItems();
+                setGetStats(response)
+            } catch (error) {
+                console.error("Error fetching trending data:", error);
+            }
+        };
+
+        fetchIngredients();
+    }, []);
     const handleSubmit = (event: React.FormEvent): void => {
         event.preventDefault();
         try {
@@ -53,6 +67,9 @@ const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
         }
     };
     const handleInputChange = (name: string, value: number): void => {
+        if (isNaN(value)) {
+            value = 0;
+        }
         dispatch(setFormValues({
             ...formValues,
             [name]: value,
@@ -67,6 +84,7 @@ const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
     };
 
     const handleShapeChange = (shape: string): void => {
+
         const defaultValues = {
             SweetBakingSoda: 120,
             NutsQuantity: 69,
@@ -81,6 +99,60 @@ const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
 
         dispatch(setFormValues(updatedFormValues));
     };
+
+
+    function computeTotals(getStats: any[]) {
+        let totalCost = 0;
+        let totalBakingTime = 0;
+        let totalCalories = 0;
+
+        // console.log(getStats)
+        getStats.forEach(ingredient => {
+            if (ingredient.name == 'nuts') {
+                totalCost += ingredient.cost * formValues.NutsQuantity;
+                totalCalories += (ingredient.calories * formValues.NutsQuantity)
+                if (formValues.NutsQuantity > 0) {
+                    totalBakingTime += ingredient.bakingTime;
+                }
+            }
+            if (ingredient.name == 'soda') {
+                totalCost += ingredient.cost * formValues.SweetBakingSoda;
+                totalCalories += (ingredient.calories * formValues.SweetBakingSoda)
+                if (formValues.SweetBakingSoda > 0) {
+                    totalBakingTime += ingredient.bakingTime;
+                }
+            }
+            if (ingredient.name == 'sugar') {
+                totalCost += ingredient.cost * formValues.SugarQuantity;
+                totalCalories += (ingredient.calories * formValues.SugarQuantity)
+                if (formValues.SugarQuantity > 0) {
+                    totalBakingTime += ingredient.bakingTime;
+                }
+            }
+            if (ingredient.name == 'oil') {
+                totalCost += ingredient.cost * formValues.OilQuantity;
+                totalCalories += (ingredient.calories * formValues.OilQuantity)
+                if (formValues.OilQuantity > 0) {
+                    totalBakingTime += ingredient.bakingTime;
+                }
+            }
+            if (ingredient.name == 'Fiber') {
+                totalCost += ingredient.cost * formValues.FiberQuantity;
+                totalCalories += (ingredient.calories * formValues.FiberQuantity)
+                if (formValues.FiberQuantity > 0) {
+                    totalBakingTime += ingredient.bakingTime;
+                }
+            }
+        });
+        return {
+            totalCost,
+            totalBakingTime,
+            totalCalories
+        };
+    }
+
+    const totals = computeTotals(getStats);
+    const totalWeight = formValues.SweetBakingSoda + formValues.NutsQuantity + formValues.SugarQuantity + formValues.OilQuantity + +formValues.FiberQuantity;
 
     return (
         <>
@@ -158,6 +230,10 @@ const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
                     {/*right upside*/}
                     <div className={`flex  w-full h-1/2`}>
                         <RecipeStats
+                            calories={totals.totalCalories / 10}
+                            time={totals.totalBakingTime}
+                            cost={totals.totalCost / 10}
+                            weight={totalWeight}
                             onChange={handleInputChange}
                         />
                     </div>
@@ -176,7 +252,6 @@ const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
             </form>
 
             <BuilderLoader/>
-
             {formErrors && (
                 <div style={{color: "red"}}>
                     {formErrors.map((error, index) => (

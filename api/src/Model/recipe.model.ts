@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import 'dotenv/config'
 
 // Enum for possible shapes
-enum Shape {
+export enum Shape {
     Star = "star",
     Triangle = "triangle",
     Square = "square",
@@ -20,6 +20,8 @@ export interface RecipeInput {
     fiber: number;      // Fiber content in the recipe
     soda: number;       // Soda used in the recipe
     nuts: number;       // Nuts used in the recipe
+    cookingTime:number; // Time taken to cook the entire recipe
+    price:number
 }
 
 // Interface extending Mongoose Document, representing Recipe document
@@ -39,6 +41,8 @@ const recipeSchema: mongoose.Schema = new mongoose.Schema({
     fiber: {type: Number, required: true},      // Fiber content in the recipe (required)
     soda: {type: Number, required: true},       // Soda used in the recipe (required)
     nuts: {type: Number, required: true},       // Nuts used in the recipe (required)
+    cookingTime:{type:Number,required:true},    // Sum of all the baking time of ingredients
+    price:{type:Number,required:true}
 }, {timestamps: true});                      // Auto-generate timestamps for createdAt and updatedAt
 
 // Define Mongoose model for Recipe using RecipeDocument interface and RecipeSchema

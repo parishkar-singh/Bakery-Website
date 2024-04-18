@@ -7,6 +7,7 @@ export interface IngredientsInput {
     unit: 'mg' | 'ml';  // Ingredient's Unit (enum)
     cost: number;       // Price bro
     stock: number;      // Availability
+    bakingTime: number // To bake no matter how much it is will take constant time. Minutes
     calories: number;
 }
 
@@ -21,8 +22,9 @@ const ingredientsSchema: mongoose.Schema = new mongoose.Schema({
     name: { type: String, required: true, unique: true },            // Ingredient's name (required)
     unit: { type: String, required: true, enum: ['mg', 'ml'] }, // Ingredients unit is enum
     calories: { type: Number, required: true },                 // Self-explanatory
-    cost: { type: Number, required: true },                     // Price in dollars
-    stock: { type: Number, required: true }                     // How many are available
+    cost: { type: Number, required: true },                     // Price in d̥ollars
+    stock: { type: Number, required: true },                     // How many are available
+    bakingTime: { type: Number, required: true },
 }, { timestamps: true });                      // Auto-generate timestamps for createdAt and updatedAt
 
 // Define Mongoose model for Ingredients using IngredientsDocument interface and IngredientsSchema

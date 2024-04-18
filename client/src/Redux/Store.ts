@@ -4,7 +4,7 @@ import formReducer from "@/Redux/Reducers.ts";
 
 const loadState = () => {
     try {
-        const serializedState = localStorage.getItem('reduxState');
+        const serializedState = localStorage.getItem('persist');
         if (serializedState === null) {
             return undefined;
         }
@@ -18,7 +18,7 @@ const loadState = () => {
 const saveState = (state: any) => {
     try {
         const serializedState = JSON.stringify(state);
-        localStorage.setItem('reduxState', serializedState);
+        localStorage.setItem('persist', serializedState);
     } catch (err) {
         console.error("Error saving state to localStorage:", err);
     }

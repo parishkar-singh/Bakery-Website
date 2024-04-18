@@ -9,11 +9,15 @@ import {BadgeDollarSign, HandCoins, HeartPulse, Scale} from "lucide-react";
 import {shadowTextMd} from "@/Utils/CssModules.ts";
 
 interface InputProps {
+    cost: number
+    calories: number
+    time: number
+    weight: number
     onChange: (name: string, value: number) => void;
 }
 
 interface RecipeStatsItemProps {
-    info: string
+    info: number
     unit?: string
 }
 
@@ -33,9 +37,7 @@ const RecipeStatItem: React.FunctionComponent<RecipeStatsItemProps> = React.memo
         </motion.span>
     </>
 })
-const RecipeStats: React.FC<InputProps> = React.memo(() => {
-    // Define the available shapes and their corresponding icons
-
+const RecipeStats: React.FC<InputProps> = React.memo((props) => {
     return (
         <div
             className={`relative overflow-clip select-none w-full h-full flex flex-col justify-center items-center group `}
@@ -46,17 +48,11 @@ const RecipeStats: React.FC<InputProps> = React.memo(() => {
             {/*<span style={{...shadowTextMd}}*/}
             {/*      className=" drop-shadow-4xl relative p-2  font-sonsie text-4xl text-white">At a Glance</span>*/}
             <div className={`relative italic grid grid-rows-2 grid-cols-2 text-6xl gap-2 font-black font-oswald`}>
-                <RecipeStatItem info={'$40'}/>
-                <RecipeStatItem info={'200'} unit={`kcal`}/>
-                <RecipeStatItem info={'10'} unit={`min`}/>
-                <RecipeStatItem info={'5'} unit={`gram`}/>
+                <RecipeStatItem info={props.cost} unit={`$`}/>
+                <RecipeStatItem info={props.calories} unit={`kcal`}/>
+                <RecipeStatItem info={props.time} unit={`min`}/>
+                <RecipeStatItem info={props.weight} unit={`gram`}/>
             </div>
-
-            {/*{Icon && (*/}
-            {/*    <Bounce whileTapCustom={.6} whileHoverCustom={1.1}>*/}
-            {/*        <Icon onClick={handleClick} className={`drop-shadow-4xl relative h-44 w-44`}/>*/}
-            {/*    </Bounce>*/}
-            {/*)}*/}
         </div>
     );
 });
