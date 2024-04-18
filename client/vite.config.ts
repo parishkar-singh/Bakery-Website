@@ -10,11 +10,5 @@ export default defineConfig(async () => ({
       '@': path.resolve(__dirname, 'src')
     }
   },
-  server: {
-    port: 3000,
-    strictPort: true,
-    watch: {
-      ignored: ["**/src-tauri/**"],
-    },
-  },
+
 }));

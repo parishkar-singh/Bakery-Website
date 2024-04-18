@@ -15,3 +15,4 @@ export const ColorClassMap: { [key: string]: string } = {
     pinkText: 'text-pink-500',
     teal:'bg-teal-500'
 };
+export const SERVER_ENDPOINT="http://localhost:8080"

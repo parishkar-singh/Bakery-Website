@@ -75,7 +75,6 @@ const BuilderForm: React.FunctionComponent = React.memo((): React.ReactNode => {
             [name]: value,
         }));
     };
-
     const handleTemperatureChange = (temperature: number): void => {
         dispatch(setFormValues({
             ...formValues,

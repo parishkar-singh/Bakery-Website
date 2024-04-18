@@ -1,6 +1,6 @@
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Home from "@/Pages/Home.tsx";
-import Auth from "@/Pages/Auth.tsx";
+import Auth from "@/Containers/SignIn.tsx";
 import Builder from "@/Pages/Builder.tsx";
 import React from "react";
 import Account from "@/Pages/Account.tsx";

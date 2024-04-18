@@ -2,7 +2,7 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } f
 
 
 const BakeryClient: AxiosInstance = axios.create({
-    baseURL: 'http://localhost:8080/api',
+    baseURL: `${process.env.REACT_APP_SERVER_ENDPOINT}/api`,
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',

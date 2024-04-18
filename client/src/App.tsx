@@ -8,6 +8,7 @@ import {ScrollTrigger} from 'gsap/ScrollTrigger';
 import Navbar from "@/Containers/Navbar.tsx";
 import {createRoot, Root} from "react-dom/client";
 import Routing from "@/Routes.tsx";
+import {AuthProvider} from "@/Context/AuthContext.tsx";
 
 const App: React.FunctionComponent = (): React.ReactElement => {
     // Mounting Smooth Scroll
@@ -42,7 +43,9 @@ const root: Root = createRoot(rootContainer);
 root.render(
     <React.StrictMode>
         <Provider store={store}>
-            <App/>
+            <AuthProvider>
+                <App/>
+            </AuthProvider>
         </Provider>
     </React.StrictMode>
 );

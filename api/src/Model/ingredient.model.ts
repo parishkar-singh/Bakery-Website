@@ -24,8 +24,8 @@ const ingredientsSchema: mongoose.Schema = new mongoose.Schema({
     calories: { type: Number, required: true },                 // Self-explanatory
     cost: { type: Number, required: true },                     // Price in d̥ollars
     stock: { type: Number, required: true },                     // How many are available
-    bakingTime: { type: Number, required: true },
-}, { timestamps: true });                      // Auto-generate timestamps for createdAt and updatedAt
+    bakingTime: { type: Number, required: true },               // How much time is required to bake thing up
+}, { timestamps: true });                                   // Auto-generate timestamps for createdAt and updatedAt
 
 // Define Mongoose model for Ingredients using IngredientsDocument interface and IngredientsSchema
 const IngredientModel = mongoose.model<IngredientsDocument>('Ingredient', ingredientsSchema);

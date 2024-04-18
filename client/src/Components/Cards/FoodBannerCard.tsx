@@ -47,7 +47,7 @@ const FoodBannerCard: React.FunctionComponent<BannerCardProps> = React.memo(({Ba
             {/*    <h1 className="relative drop-shadow-4xl font-sonsie group-hover:scale-125 transition duration-200 text-5xl ">{Heading}</h1>*/}
             {/*</Bounce>*/}
             <div
-                className="absolute text-xl flex flex-col  p-2 backdrop-blur-xl bg-black/10 rounded-3xl justify-center items-center gap-2  font-oswald h-3/4 w-3/2  ">
+                className="absolute text-xl flex flex-col  p-2 backdrop-blur-sm bg-black/30 rounded-3xl justify-center items-center gap-2 font-oswald h-3/4 w-3/2  ">
                 <p>Name: {Details?.name}</p>
                 <p>Shape: {Details?.shape}</p>
                 <p>Temperature: {Details?.temperature}</p>

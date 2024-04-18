@@ -10,6 +10,7 @@
     "tauri": "tauri"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.4",
     "@reduxjs/toolkit": "^2.2.3",
     "@studio-freight/lenis": "^1.0.42",
     "@tabler/icons-react": "^3.2.0",
