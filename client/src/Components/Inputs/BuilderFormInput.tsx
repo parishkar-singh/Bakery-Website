@@ -15,7 +15,8 @@ interface InputProps {
 
 const BuilderFormInput: React.FC<InputProps> = React.memo((props) => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const newValue: number = parseFloat(event.target.value);
+        let newValue: number = parseFloat(event.target.value);
+        newValue = Math.abs(newValue);
         props.onChange(props.name, newValue);
     };
 
