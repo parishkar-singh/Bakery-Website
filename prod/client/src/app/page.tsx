@@ -1,7 +1,8 @@
 'use client'
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import Lenis from '@studio-freight/lenis'
 import gsap from "gsap";
+import Banner from "@/Containers/Banner";
 
 const App: React.FunctionComponent = (): React.ReactElement => {
     // Mounting Smooth Scroll
@@ -18,8 +19,9 @@ const App: React.FunctionComponent = (): React.ReactElement => {
         return (): void => {
         };
     }, []);
-    return (
-        <main>
-        </main>
+    return (<>
+
+            <Banner/>
+        </>
     );
 }
